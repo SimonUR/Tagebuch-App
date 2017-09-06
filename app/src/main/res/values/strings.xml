@@ -13,4 +13,6 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+    <string name="title_activity_reise_main">ReiseMainActivity</string>
+    <string name="title_activity_reise_single_trip">ReiseSingleTripActivity</string>
 </resources>

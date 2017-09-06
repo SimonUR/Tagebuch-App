@@ -23,7 +23,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".RegistryActivity"></activity>
+        <activity android:name=".RegistryActivity" />
+        <activity
+            android:name=".ReiseMainActivity"
+            android:label="@string/title_activity_reise_main"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ReiseSingleTripActivity"
+            android:label="@string/title_activity_reise_single_trip"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
