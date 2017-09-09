@@ -3,6 +3,7 @@ package com.example.simon.tagebuch_app;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
@@ -61,6 +62,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private EditText mPasswordView;
     private View mProgressView;
     private View mLoginFormView;
+    private Button skipToRegistryActivity;
+    private Button skipToReiseMain;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +72,25 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         // Set up the login form.
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
         populateAutoComplete();
+
+        skipToRegistryActivity = (Button) findViewById(R.id.skipToRegistryActivity);
+        final Intent intent = new Intent(this, RegistryActivity.class);
+        skipToRegistryActivity.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(intent);
+            }
+        });
+
+
+        skipToReiseMain = (Button) findViewById(R.id.skipToReiseMain);
+        final Intent intent1 = new Intent(this, ReiseMainActivity.class);
+        skipToReiseMain.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(intent1);
+            }
+        });
 
         mPasswordView = (EditText) findViewById(R.id.password);
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
