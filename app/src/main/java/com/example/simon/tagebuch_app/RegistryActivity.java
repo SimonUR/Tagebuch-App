@@ -26,8 +26,16 @@ public class RegistryActivity extends AppCompatActivity {
         abschicken.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                readDaten();
             }
         });
+    }
+
+    private void readDaten() {
+        String name = inputName.getText().toString();
+        String email = inputEmail.getText().toString();
+        String passwort = inputPasswort.getText().toString();
+        String passwortWieder = inputPasswortWieder.getText().toString();
+
     }
 }
