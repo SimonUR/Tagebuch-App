@@ -22,6 +22,13 @@
 
     <include layout="@layout/content_reise_main" />
 
+    <Button
+        android:id="@+id/todo_edit_button"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.2"
+        android:text="Add" />
+
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="wrap_content"
@@ -29,5 +36,44 @@
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
         app:srcCompat="@android:drawable/ic_dialog_email" />
+
+    <EditText
+        android:id="@+id/ort_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#f00"
+        android:hint="Ort eintippen"
+        android:padding="10dp"
+        android:maxLines="1"
+        android:textColor="@android:color/white"
+        android:textColorHint="#333333" />
+    <EditText
+        android:id="@+id/start_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ff0"
+        android:hint="Ort eintippen"
+        android:padding="10dp"
+        android:maxLines="1"
+        android:textColor="@android:color/white"
+        android:textColorHint="#333333" />
+
+    <EditText
+        android:id="@+id/end_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#f0f"
+        android:hint="Ort eintippen"
+        android:padding="10dp"
+        android:maxLines="1"
+        android:textColor="@android:color/white"
+        android:textColorHint="#333333" />
+
+    <ListView
+        android:id="@+id/reise_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:animateLayoutChanges="true"
+        android:padding="10dp" />
 
 </android.support.design.widget.CoordinatorLayout>
