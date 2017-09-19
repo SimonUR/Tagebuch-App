@@ -28,7 +28,7 @@
         android:textSize="14sp" />
 
     <TextView
-        android:id="@+id/reise_end"
+        android:id="@+id/reise_ende"
         android:layout_width="85dp"
         android:layout_height="fill_parent"
         android:layout_alignParentBottom="true"

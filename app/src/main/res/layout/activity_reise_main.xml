@@ -15,7 +15,7 @@ android:orientation="vertical">
     android:textSize="20sp" />
 
 <EditText
-    android:id="@+id/reise_name"
+    android:id="@+id/reise_name_add"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="#ff0"
@@ -34,7 +34,7 @@ android:orientation="vertical">
 
 
         <EditText
-            android:id="@+id/reise_begin"
+            android:id="@+id/reise_begin_add"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.8"
@@ -44,7 +44,7 @@ android:orientation="vertical">
             android:textColorHint="@android:color/darker_gray" />
 
         <EditText
-            android:id="@+id/reise_ende"
+            android:id="@+id/reise_ende_add"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.8"

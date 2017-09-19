@@ -52,6 +52,12 @@ public class ReiseMainActivity extends AppCompatActivity {
         */
     }
 
+    @Override
+    protected void onDestroy(){
+        reisenUebersichtDatabase.close();
+        super.onDestroy();
+    }
+
     private void initDatabase() {
         reisenUebersichtDatabase = new ReisenUebersichtDatabase(this);
         reisenUebersichtDatabase.open();
@@ -74,49 +80,54 @@ public class ReiseMainActivity extends AppCompatActivity {
         initListView();
     }
 
-        // #### initTaskButton();
-        private void initTaskButton() {
-            Button addTaskButton = (Button) findViewById(R.id.todo_edit_button);
-            addTaskButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    addInputToList();
+    private void initTaskButton() {
+        Button addTaskButton = (Button) findViewById(R.id.todo_edit_button);
+        addTaskButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addInputToList();
                 }
             });
         }
-        private void addInputToList() {
-            EditText ort_input = (EditText) findViewById(R.id.reise_name);
-            EditText start_input = (EditText) findViewById(R.id.reise_begin);
-            EditText end_input = (EditText) findViewById(R.id.reise_ende);
+    private void addInputToList() {
+        EditText ort_input = (EditText) findViewById(R.id.reise_name_add);
+        EditText start_input = (EditText) findViewById(R.id.reise_begin_add);
+        EditText end_input = (EditText) findViewById(R.id.reise_ende_add);
 
-            String ort = ort_input.getText().toString();
-            String start = start_input.getText().toString();
-            String end = end_input.getText().toString();
+        String ort = ort_input.getText().toString();
+        String start = start_input.getText().toString();
+        String end = end_input.getText().toString();
 
-            if (!ort.equals("")) {
+            if (!ort.equals("") && !start.equals("") && !end.equals("")) {
                 ort_input.setText("");
                 start_input.setText("");
                 end_input.setText("");
-                addNewTask(ort, start, end);
+                addNewReise(ort, start, end);
             }
+
         }
-        private void addNewTask(String ort, String start, String end) {
+        private void addNewReise(String ort, String start, String end) {
 
             ReiseItem newReise = new ReiseItem(ort, start, end);
 
             reisenUebersichtDatabase.insertReiseItem(newReise);
-            refreshArrayList();
-        }
 
-        private void refreshArrayList(){
-            ArrayList tempList = reisenUebersichtDatabase.getAllReiseItems();
-            reisen.clear();
-            reisen.addAll(tempList);
+
+            reisen.add(newReise);
+            updateList();
             reisen_adapter.notifyDataSetChanged();
+            System.out.println("AHHHHHHHHHHAAAAAAAAAAAAAAAA!!!!!!!!!!!!!");
+
         }
 
+    private void updateList() {
+        reisen.clear();
+        reisen.addAll(reisenUebersichtDatabase.getAllReiseItems());
+        reisen_adapter.notifyDataSetChanged();
+    }
 
-        // #### initListView();
+
+    // #### initListView();
         private void initListView() {
             ListView list = (ListView) findViewById(R.id.reise_list);
             list.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
@@ -131,7 +142,7 @@ public class ReiseMainActivity extends AppCompatActivity {
         private void removeTaskAtPosition(int position) {
             if (reisen.get(position) != null) {
                 reisenUebersichtDatabase.removeReiseItem(reisen.get(position));
-                refreshArrayList();
+
             }
         }
 
