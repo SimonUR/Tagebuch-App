@@ -29,11 +29,11 @@
         <activity
             android:name=".ReiseMainActivity"
             android:label="@string/title_activity_reise_main"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".ReiseSingleTripActivity"
             android:label="@string/title_activity_reise_single_trip"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme" />
         <activity android:name=".ReiseSingleDayActivity" />
         <activity android:name=".ReiseSingleTripAddDayActivity"></activity>
     </application>

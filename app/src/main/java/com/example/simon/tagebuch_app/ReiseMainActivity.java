@@ -40,6 +40,7 @@ public class ReiseMainActivity extends AppCompatActivity {
         initReiseList();
         //UI
         initUI();
+        updateList();
         /*
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
