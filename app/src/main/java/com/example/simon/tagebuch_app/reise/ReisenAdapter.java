@@ -39,7 +39,7 @@ public class ReisenAdapter extends ArrayAdapter<ReiseItem> {
         if (reiseItem != null) {
             TextView reiseOrt = (TextView) v.findViewById(R.id.reise_name);
             TextView reiseBegin = (TextView) v.findViewById(R.id.reise_begin);
-            TextView reiseEnd = (TextView) v.findViewById(R.id.reise_end);
+            TextView reiseEnd = (TextView) v.findViewById(R.id.reise_ende);
 
             reiseOrt.setText(reiseItem.getOrt());
             reiseBegin.setText(reiseItem.getStart());

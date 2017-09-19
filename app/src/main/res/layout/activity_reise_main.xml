@@ -1,79 +1,73 @@
-<?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:orientation="vertical">
+
+<TextView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#f00"
+    android:gravity="center"
+    android:padding="10dp"
+    android:paddingBottom="16dp"
+    android:text="HEADER-Text"
+    android:textColor="@android:color/white"
+    android:textSize="20sp" />
+
+<EditText
+    android:id="@+id/reise_name"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#ff0"
+    android:hint="Ort eintippen"
+    android:padding="10dp"
+    android:maxLines="1"
+    android:textColor="#333"
+    android:textColorHint="#000" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#efefef"
+        android:orientation="horizontal"
+        android:padding="10dp">
+
+
+        <EditText
+            android:id="@+id/reise_begin"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.8"
+            android:hint="Start-Datum"
+            android:inputType="date"
+            android:textColor="@android:color/white"
+            android:textColorHint="@android:color/darker_gray" />
+
+        <EditText
+            android:id="@+id/reise_ende"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.8"
+            android:hint="End-Datum"
+            android:inputType="date"
+            android:textColor="@android:color/white"
+            android:textColorHint="@android:color/darker_gray" />
+
+
+        <Button
+            android:id="@+id/todo_edit_button"
+            android:layout_width="30dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.2"
+            android:text="Add" />
+
+    </LinearLayout>
+
+<ListView
+    android:id="@+id/reise_list"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.simon.tagebuch_app.ReiseMainActivity">
+    android:animateLayoutChanges="true"
+    android:padding="10dp" />
 
-    <android.support.design.widget.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
-
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
-
-    </android.support.design.widget.AppBarLayout>
-
-    <include layout="@layout/content_reise_main" />
-
-    <Button
-        android:id="@+id/todo_edit_button"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="0.2"
-        android:text="Add" />
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@android:drawable/ic_dialog_email" />
-
-    <EditText
-        android:id="@+id/ort_input"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#f00"
-        android:hint="Ort eintippen"
-        android:padding="10dp"
-        android:maxLines="1"
-        android:textColor="@android:color/white"
-        android:textColorHint="#333333" />
-    <EditText
-        android:id="@+id/start_input"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#ff0"
-        android:hint="Ort eintippen"
-        android:padding="10dp"
-        android:maxLines="1"
-        android:textColor="@android:color/white"
-        android:textColorHint="#333333" />
-
-    <EditText
-        android:id="@+id/end_input"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#f0f"
-        android:hint="Ort eintippen"
-        android:padding="10dp"
-        android:maxLines="1"
-        android:textColor="@android:color/white"
-        android:textColorHint="#333333" />
-
-    <ListView
-        android:id="@+id/reise_list"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:animateLayoutChanges="true"
-        android:padding="10dp" />
-
-</android.support.design.widget.CoordinatorLayout>
+</LinearLayout>

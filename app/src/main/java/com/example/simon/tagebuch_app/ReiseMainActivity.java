@@ -32,15 +32,15 @@ public class ReiseMainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reise_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        //setSupportActionBar(toolbar);
         // Datenbank für Orte initialisieren
         initDatabase();
         // ArrayList für Reisen initialisieren
         initReiseList();
         //UI
         initUI();
-
+        /*
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -49,6 +49,7 @@ public class ReiseMainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+        */
     }
 
     private void initDatabase() {
@@ -62,7 +63,7 @@ public class ReiseMainActivity extends AppCompatActivity {
     }
 
     private void initListAdapter() {
-        ListView list = (ListView) findViewById(R.id.reisen_list);
+        ListView list = (ListView) findViewById(R.id.reise_list);
         reisen_adapter = new ReisenAdapter(this, reisen);
         list.setAdapter(reisen_adapter);
     }
@@ -84,9 +85,9 @@ public class ReiseMainActivity extends AppCompatActivity {
             });
         }
         private void addInputToList() {
-            EditText ort_input = (EditText) findViewById(R.id.ort_input);
-            EditText start_input = (EditText) findViewById(R.id.start_input);
-            EditText end_input = (EditText) findViewById(R.id.end_input);
+            EditText ort_input = (EditText) findViewById(R.id.reise_name);
+            EditText start_input = (EditText) findViewById(R.id.reise_begin);
+            EditText end_input = (EditText) findViewById(R.id.reise_ende);
 
             String ort = ort_input.getText().toString();
             String start = start_input.getText().toString();
