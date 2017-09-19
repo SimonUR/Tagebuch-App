@@ -1,7 +1,6 @@
 package com.example.simon.tagebuch_app.reise;
 
 
-
 public class ReiseItem {
     private String ort;
     private String start;

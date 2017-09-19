@@ -9,7 +9,6 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import com.example.simon.tagebuch_app.reise.ReiseItem;
 
-import java.io.File;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -18,13 +17,13 @@ import java.util.Date;
 import java.util.Locale;
 
 
-public class ReisenUebersichtDatabase {
+public class ReisenUebersichtDatabase_ALT {
     private static final String DATABASE_NAME = "ReisenUebersicht.db";
     private static final int DATABASE_VERSION = 1;
 
     private static final String DATABASE_TABLE = "reisen";
 
-    public static final String KEY_ID = "_id";
+    public static final String KEY_ID = "id";
     public static final String KEY_ORT = "ort";
     public static final String KEY_DATE_START = "date_start";
     public static final String KEY_DATE_END = "date_end";
@@ -37,16 +36,10 @@ public class ReisenUebersichtDatabase {
 
     private SQLiteDatabase db;
 
-    public ReisenUebersichtDatabase(Context context) {
+    public ReisenUebersichtDatabase_ALT(Context context) {
         dbHelper = new ReisenUebersichtDatabaseHelper(context, DATABASE_NAME, null,
                 DATABASE_VERSION);
         System.out.println("Datenbank erzeugt");
-        checkDatabase(context, DATABASE_NAME );
-    }
-    private static boolean checkDatabase(Context context, String DATABASE_NAME) {
-        File dbFile = context.getDatabasePath(DATABASE_NAME);
-        System.out.println("FILE EXISTS: " + dbFile.exists());
-        return dbFile.exists();
     }
 
     public void open() throws SQLException {
@@ -99,14 +92,13 @@ public class ReisenUebersichtDatabase {
                 + " text not null, " + KEY_DATE_START + " text, "  + KEY_DATE_END + " text);";
 
         public ReisenUebersichtDatabaseHelper(Context c, String dbname,
-                                              SQLiteDatabase.CursorFactory factory, int version) {
+                                SQLiteDatabase.CursorFactory factory, int version) {
             super(c, dbname, factory, version);
         }
 
         @Override
         public void onCreate(SQLiteDatabase db) {
             db.execSQL(DATABASE_CREATE);
-            System.out.println("DATENBANK ERSTELLT!!!!!!!!!!!!!!!");
         }
 
         @Override

@@ -21,12 +21,11 @@
         android:id="@+id/reise_begin"
         android:layout_width="85dp"
         android:layout_height="fill_parent"
+        android:layout_alignParentEnd="true"
         android:gravity="center_vertical"
         android:padding="5dp"
         android:textSize="14sp"
-        android:layout_alignBaseline="@+id/reise_name"
-        android:layout_alignBottom="@+id/reise_name"
-        android:layout_toStartOf="@+id/reise_ende" />
+        android:layout_alignParentBottom="true" />
 
     <TextView
         android:id="@+id/reise_ende"

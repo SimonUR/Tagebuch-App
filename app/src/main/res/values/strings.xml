@@ -15,6 +15,6 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
-    <string name="title_activity_reise_main">Deine Tagebuch-App | Übersicht</string>
+    <string name="title_activity_reise_main">Tagebuch-App | Übersicht Reisen</string>
     <string name="title_activity_reise_single_trip">ReiseSingleTripActivity</string>
 </resources>
