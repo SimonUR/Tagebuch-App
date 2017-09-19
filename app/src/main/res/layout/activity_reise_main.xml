@@ -10,7 +10,7 @@ android:orientation="vertical">
     android:gravity="center"
     android:padding="10dp"
     android:paddingBottom="16dp"
-    android:text="Neue Reise hinzufügen"
+    android:text="Neue Reise hinzufügenn"
     android:textColor="@android:color/white"
     android:textSize="20sp" />
 
