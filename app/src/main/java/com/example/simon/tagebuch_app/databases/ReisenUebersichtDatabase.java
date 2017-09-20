@@ -35,7 +35,7 @@ public class ReisenUebersichtDatabase {
     public static final int COLUMN_DATE_END_INDEX = 3;
 
     private ReisenUebersichtDatabaseHelper dbHelper;
-
+//HAllo
     private SQLiteDatabase db;
 
     public ReisenUebersichtDatabase(Context context) {
