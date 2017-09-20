@@ -20,7 +20,6 @@
             android:layout_marginLeft="25dp"
             android:textSize="18sp"
             android:textStyle="bold"
-
             android:layout_gravity="center_horizontal|center_vertical"/>
 
 
@@ -34,8 +33,7 @@
         android:layout_marginRight="16dp"
         android:layout_marginBottom="30dp"
         android:orientation="vertical"
-        android:background="#faa519"
-        >
+        android:background="#faa519">
 
         <EditText android:layout_width="fill_parent"
             android:layout_height="40dp"
@@ -51,28 +49,36 @@
             android:background="#f3f3f3"
             android:paddingLeft="5dp"
             android:layout_marginTop="15dp"/>
-        <EditText android:layout_width="fill_parent"
-            android:layout_height="40dp"
+
+        <EditText
             android:id="@+id/passwort"
-            android:hint="passwort"
-            android:background="#f3f3f3"
-            android:paddingLeft="5dp"
-            android:layout_marginTop="15dp"/>
-        <EditText android:layout_width="fill_parent"
+            android:layout_width="fill_parent"
             android:layout_height="40dp"
-            android:id="@+id/password_bestätigen"
-            android:hint="passwort bestätigen"
+            android:layout_marginTop="15dp"
             android:background="#f3f3f3"
-            android:paddingLeft="5dp"
-            android:layout_marginTop="15dp"/>
-        <Button android:layout_width="190dp"
+            android:hint="passwort"
+            android:inputType="textPassword"
+            android:paddingLeft="5dp" />
+
+        <EditText
+            android:id="@+id/password_bestätigen"
+            android:layout_width="fill_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="15dp"
+            android:background="#f3f3f3"
+            android:hint="passwort bestätigen"
+            android:inputType="textPassword"
+            android:paddingLeft="5dp" />
+
+        <Button
+            android:id="@+id/abschicken"
+            android:layout_width="190dp"
             android:layout_height="38dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="16dp"
-            android:id="@+id/abschicken"
+            android:background="#0000ff"
             android:text="abschicken"
-            android:textColor="#fff"
-            android:background="#0000ff"/>
+            android:textColor="#fff" />
 
     </LinearLayout>
 
