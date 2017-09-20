@@ -197,6 +197,9 @@ public class ReiseMainActivity extends AppCompatActivity {
         private void removeTaskAtPosition(int position) {
             if (reisen.get(position) != null) {
                 reisenUebersichtDatabase.removeReiseItem(reisen.get(position));
+                reisen.remove(position);
+                updateList();
+                reisen_adapter.notifyDataSetChanged();
 
             }
         }

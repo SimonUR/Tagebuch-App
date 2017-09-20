@@ -35,7 +35,6 @@ public class ReisenUebersichtDatabase {
     public static final int COLUMN_DATE_END_INDEX = 3;
 
     private ReisenUebersichtDatabaseHelper dbHelper;
-//HAllo
     private SQLiteDatabase db;
 
     public ReisenUebersichtDatabase(Context context) {
@@ -101,8 +100,9 @@ public class ReisenUebersichtDatabase {
     }
 
     public void removeReiseItem(ReiseItem item) {
-        String toDelete = KEY_ORT + "=?";
-        String[] deleteArguments = new String[]{item.getOrt()};
+        String toDelete = KEY_ORT +"=?" + " AND " + KEY_DATE_START + "=?" + " AND " + KEY_DATE_END + "=?";
+        String[] deleteArguments = new String[]{String.valueOf(item.getOrt()), String.valueOf(item.getFormattedStartDate()),
+                String.valueOf(item.getFormattedEndDate())};
         db.delete(DATABASE_TABLE, toDelete, deleteArguments);
     }
 
