@@ -17,4 +17,12 @@
     </string>
     <string name="title_activity_reise_main">Tagebuch-App | Übersicht Reisen</string>
     <string name="title_activity_reise_single_trip">ReiseSingleTripActivity</string>
+
+    <!-- Strings related to MainActivity -->
+    <string name="addNewTravel">Neue Reise hinzufügen:</string>
+    <string name="travelAim">Reiseort</string>
+    <string name="beginTravel">Beginn (Datum)</string>
+    <string name="endTravel">Ende (Datum)</string>
+
+
 </resources>

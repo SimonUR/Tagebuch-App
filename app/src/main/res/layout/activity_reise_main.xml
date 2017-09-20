@@ -1,34 +1,37 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-android:orientation="vertical">
-
-<TextView
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="#333"
-    android:gravity="center"
-    android:padding="10dp"
-    android:paddingBottom="16dp"
-    android:text="Neue Reise hinzufügenn"
-    android:textColor="@android:color/white"
-    android:textSize="20sp" />
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-<EditText
-    android:id="@+id/reise_name_add"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="#ff0"
-    android:hint="Ort eintippen"
-    android:padding="10dp"
-    android:maxLines="1"
-    android:textColor="#333"
-    android:textColorHint="#000" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#333"
+        android:gravity="center"
+        android:padding="10dp"
+        android:paddingBottom="16dp"
+        android:text="@string/addNewTravel"
+        android:textAlignment="viewStart"
+        android:textColor="@android:color/white"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/reise_name_add"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#333"
+        android:hint="@string/travelAim"
+        android:padding="10dp"
+        android:maxLines="1"
+        android:textColor="@android:color/white"
+        android:textColorHint="@android:color/darker_gray" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#efefef"
+        android:background="#333"
         android:orientation="horizontal"
         android:padding="10dp">
 
@@ -38,7 +41,7 @@ android:orientation="vertical">
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.8"
-            android:hint="Start-Datum"
+            android:hint="@string/beginTravel"
             android:focusable="false"
             android:inputType="date"
             android:textColor="@android:color/white"
@@ -49,7 +52,7 @@ android:orientation="vertical">
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.8"
-            android:hint="End-Datum"
+            android:hint="@string/endTravel"
             android:focusable="false"
             android:inputType="date"
             android:textColor="@android:color/white"
@@ -61,15 +64,16 @@ android:orientation="vertical">
             android:layout_width="30dp"
             android:layout_height="match_parent"
             android:layout_weight="0.2"
-            android:text="Add" />
+            android:text="+"
+            android:textSize="18sp" />
 
     </LinearLayout>
 
-<ListView
-    android:id="@+id/reise_list"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:animateLayoutChanges="true"
-    android:padding="10dp" />
+    <ListView
+        android:id="@+id/reise_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:animateLayoutChanges="true"
+        android:padding="10dp" />
 
 </LinearLayout>

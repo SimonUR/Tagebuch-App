@@ -104,6 +104,7 @@ public class ReisenUebersichtDatabase {
         String[] deleteArguments = new String[]{String.valueOf(item.getOrt()), String.valueOf(item.getFormattedStartDate()),
                 String.valueOf(item.getFormattedEndDate())};
         db.delete(DATABASE_TABLE, toDelete, deleteArguments);
+        System.out.println(toDelete);
     }
 
     private class ReisenUebersichtDatabaseHelper extends SQLiteOpenHelper {
@@ -123,8 +124,10 @@ public class ReisenUebersichtDatabase {
             System.out.println("DATENBANK ERSTELLT!!!!!!!!!!!!!!!");
         }
 
+
         @Override
         public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         }
+
     }
 }
