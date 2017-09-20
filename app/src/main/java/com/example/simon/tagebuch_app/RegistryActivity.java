@@ -47,9 +47,8 @@ public class RegistryActivity extends AppCompatActivity {
         String email = inputEmail.getText().toString().trim();
         String passwort = inputPasswort.getText().toString().trim();
         String passwortWieder = inputPasswortWieder.getText().toString().trim();
-        Boolean result = myDb.insertData(name,email,passwort);
-        if ( result == true &&
-                name.trim().length() != 0 &&
+        //Boolean result = myDb.insertData(name,email,passwort);
+        if (name.trim().length() != 0 &&
                 email.trim().length() != 0 &&
                 passwort.trim().length() != 0 &&
                 passwortWieder.trim().length() != 0 &&
@@ -57,6 +56,7 @@ public class RegistryActivity extends AppCompatActivity {
                 passwort.trim().length() >= 6 &&
                 email.matches(emailPattern))
         {
+            myDb.insertData(name,email,passwort);
             Toast.makeText(this, "Data Inserted Successfully", Toast.LENGTH_SHORT).show();
             clearText();
 
