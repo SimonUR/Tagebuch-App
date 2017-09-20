@@ -42,8 +42,8 @@ public class ReisenAdapter extends ArrayAdapter<ReiseItem> {
             TextView reiseEnd = (TextView) v.findViewById(R.id.reise_ende);
 
             reiseOrt.setText(reiseItem.getOrt());
-            reiseBegin.setText(reiseItem.getStart());
-            reiseEnd.setText(reiseItem.getEnd());
+            reiseBegin.setText(reiseItem.getFormattedStartDate());
+            reiseEnd.setText(reiseItem.getFormattedEndDate());
         }
 
         return v;

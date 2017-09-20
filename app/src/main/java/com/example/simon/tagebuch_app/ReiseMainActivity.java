@@ -1,5 +1,6 @@
 package com.example.simon.tagebuch_app;
 
+import android.app.DialogFragment;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -13,13 +14,20 @@ import com.example.simon.tagebuch_app.databases.ReisenUebersichtDatabase;
 import com.example.simon.tagebuch_app.reise.ReiseItem;
 import com.example.simon.tagebuch_app.reise.ReisenAdapter;
 
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.Locale;
 
 public class ReiseMainActivity extends AppCompatActivity {
 
     private ArrayList<ReiseItem> reisen = new ArrayList<ReiseItem>();
     private ReisenAdapter reisen_adapter;
     private ReisenUebersichtDatabase reisenUebersichtDatabase;
+    public static boolean startDatePicker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,6 +82,39 @@ public class ReiseMainActivity extends AppCompatActivity {
     private void initUI() {
         initTaskButton();
         initListView();
+        initDateFields();
+    }
+
+    private void initDateFields() {
+        final EditText startDateEdit = (EditText) findViewById(R.id.reise_begin_add);
+        EditText endDateEdit = (EditText) findViewById(R.id.reise_ende_add);
+
+        startDateEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+                startDatePicker = true;
+                showEndDatePickerDialog();
+            }
+        });
+
+        endDateEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+                startDatePicker = false;
+                showStartDatePickerDialog();
+            }
+        });
+
+    }
+
+    private void showStartDatePickerDialog() {
+        DialogFragment dateFragment = new DatePickerFragment();
+        dateFragment.show(getFragmentManager(), "datePickerStart");
+    }
+
+    private void showEndDatePickerDialog() {
+        DialogFragment dateFragment = new DatePickerFragment();
+        dateFragment.show(getFragmentManager(), "datePickerEnd");
     }
 
     private void initTaskButton() {
@@ -104,7 +145,16 @@ public class ReiseMainActivity extends AppCompatActivity {
         }
         private void addNewReise(String ort, String start, String end) {
 
-            ReiseItem newReise = new ReiseItem(ort, start, end);
+            Date startDate = getDateFromString(start);
+            Date endDate = getDateFromString(end);
+
+            GregorianCalendar calendarStart = new GregorianCalendar();
+            GregorianCalendar calendarEnd = new GregorianCalendar();
+            calendarStart.setTime(startDate);
+            calendarEnd.setTime(endDate);
+
+            ReiseItem newReise = new ReiseItem(ort, calendarStart.get(Calendar.DAY_OF_MONTH), calendarStart.get(Calendar.MONTH), calendarStart.get(Calendar.YEAR),
+                    calendarEnd.get(Calendar.DAY_OF_MONTH), calendarEnd.get(Calendar.MONTH), calendarEnd.get(Calendar.YEAR));
 
             reisenUebersichtDatabase.insertReiseItem(newReise);
 
@@ -112,9 +162,18 @@ public class ReiseMainActivity extends AppCompatActivity {
             reisen.add(newReise);
             updateList();
             reisen_adapter.notifyDataSetChanged();
-            System.out.println("AHHHHHHHHHHAAAAAAAAAAAAAAAA!!!!!!!!!!!!!");
 
         }
+
+    private Date getDateFromString(String date) {
+        DateFormat df = DateFormat.getDateInstance(DateFormat.SHORT, Locale.GERMANY);
+        try{
+            return df.parse(date);
+        } catch (ParseException e){
+            // return current date as fallback
+            return new Date();
+        }
+    }
 
     private void updateList() {
         reisen.clear();

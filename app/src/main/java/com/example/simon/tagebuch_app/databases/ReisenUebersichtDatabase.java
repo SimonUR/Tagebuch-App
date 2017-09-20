@@ -15,6 +15,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.Locale;
 
 
@@ -40,13 +41,6 @@ public class ReisenUebersichtDatabase {
     public ReisenUebersichtDatabase(Context context) {
         dbHelper = new ReisenUebersichtDatabaseHelper(context, DATABASE_NAME, null,
                 DATABASE_VERSION);
-        System.out.println("Datenbank erzeugt");
-        checkDatabase(context, DATABASE_NAME );
-    }
-    private static boolean checkDatabase(Context context, String DATABASE_NAME) {
-        File dbFile = context.getDatabasePath(DATABASE_NAME);
-        System.out.println("FILE EXISTS: " + dbFile.exists());
-        return dbFile.exists();
     }
 
     public void open() throws SQLException {
@@ -64,8 +58,8 @@ public class ReisenUebersichtDatabase {
     public long insertReiseItem(ReiseItem item) {
         ContentValues itemValues = new ContentValues();
         itemValues.put(KEY_ORT, item.getOrt());
-        itemValues.put(KEY_DATE_START, item.getStart());
-        itemValues.put(KEY_DATE_END, item.getEnd());
+        itemValues.put(KEY_DATE_START, item.getFormattedStartDate());
+        itemValues.put(KEY_DATE_END, item.getFormattedEndDate());
         return db.insert(DATABASE_TABLE, null, itemValues);
     }
 
@@ -73,13 +67,33 @@ public class ReisenUebersichtDatabase {
         ArrayList<ReiseItem> items = new ArrayList<ReiseItem>();
         Cursor cursor = db.query(DATABASE_TABLE, new String[] { KEY_ID,
                 KEY_ORT, KEY_DATE_START, KEY_DATE_END }, null, null, null, null, null);
+
         if (cursor.moveToFirst()) {
             do {
                 String ort = cursor.getString(COLUMN_ORT_INDEX);
-                String start = cursor.getString(COLUMN_DATE_START_INDEX);
-                String end = cursor.getString(COLUMN_DATE_END_INDEX);
+                String startDate = cursor.getString(COLUMN_DATE_START_INDEX);
+                String endDate = cursor.getString(COLUMN_DATE_END_INDEX);
 
-                items.add(new ReiseItem(ort,start, end));
+                Date formattedStartDate = null;
+                Date formattedEndDate = null;
+                try {
+                    formattedStartDate = new SimpleDateFormat("dd.MM.yyyy",
+                            Locale.GERMAN).parse(startDate);
+                    formattedEndDate = new SimpleDateFormat("dd.MM.yyyy",
+                            Locale.GERMAN).parse(endDate);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+
+
+                Calendar calendarStart = Calendar.getInstance(Locale.GERMAN);
+                Calendar calendarEnd = Calendar.getInstance(Locale.GERMAN);
+
+                calendarStart.setTime(formattedStartDate);
+                calendarEnd.setTime(formattedEndDate);
+
+                items.add(new ReiseItem(ort, calendarStart.get(Calendar.DAY_OF_MONTH), calendarStart.get(Calendar.MONTH), calendarStart.get(Calendar.YEAR),
+                        calendarEnd.get(Calendar.DAY_OF_MONTH), calendarEnd.get(Calendar.MONTH), calendarEnd.get(Calendar.YEAR)));
 
             } while (cursor.moveToNext());
         }
