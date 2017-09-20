@@ -1,6 +1,8 @@
 package com.example.simon.tagebuch_app;
 
 import android.app.DialogFragment;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -185,6 +187,13 @@ public class ReiseMainActivity extends AppCompatActivity {
     // #### initListView();
         private void initListView() {
             ListView list = (ListView) findViewById(R.id.reise_list);
+            list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    Intent intentToNewActivty = new Intent(ReiseMainActivity.this, ReiseSingleTripActivity.class);
+                    startActivity(intentToNewActivty);
+                }
+            });
             list.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
                 @Override
                 public boolean onItemLongClick(AdapterView<?> parent, View view,

@@ -74,20 +74,20 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         populateAutoComplete();
 
         skipToRegistryActivity = (Button) findViewById(R.id.skipToRegistryActivity);
-        final Intent intent = new Intent(this, RegistryActivity.class);
         skipToRegistryActivity.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this, RegistryActivity.class);
                 startActivity(intent);
             }
         });
 
 
         skipToReiseMain = (Button) findViewById(R.id.skipToReiseMain);
-        final Intent intent1 = new Intent(this, ReiseMainActivity.class);
         skipToReiseMain.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
+                final Intent intent1 = new Intent(LoginActivity.this, ReiseMainActivity.class);
                 startActivity(intent1);
             }
         });
