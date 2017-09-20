@@ -27,7 +27,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".RegistryActivity" />
+        <activity android:name=".RegistryActivity"
+            android:label="REGISTRIEREN"
+            android:theme="@style/AppTheme"/>
         <activity
             android:name=".ReiseMainActivity"
             android:label="@string/title_activity_reise_main"
