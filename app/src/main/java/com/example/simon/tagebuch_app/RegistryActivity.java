@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.app.AlertDialog.Builder;
 import android.widget.Toast;
 
 import com.example.simon.tagebuch_app.databases.RegistryDB;
@@ -46,24 +45,22 @@ public class RegistryActivity extends AppCompatActivity {
         String passwort = inputPasswort.getText().toString();
         String passwortWieder = inputPasswortWieder.getText().toString();
         Boolean result = myDb.insertData(name,email,passwort);
-        if (result == true)
+        if ( result == true &&
+                name.trim().length() != 0 &&
+                email.trim().length() != 0 &&
+                passwort.trim().length() != 0 &&
+                passwortWieder.trim().length() != 0 &&
+                passwort.equals(passwortWieder) &&
+                passwort.trim().length() >= 8)
         {
             Toast.makeText(this, "Data Inserted Successfully", Toast.LENGTH_SHORT).show();
-            //clearText();
+            clearText();
+
         }else {
             Toast.makeText(this, "Data Inserted Failed!",Toast.LENGTH_SHORT).show();
         }
     }
 
-
-    public void alert(String title,String message)
-    {
-        Builder builder=new Builder(this);
-        builder.setCancelable(true);
-        builder.setTitle(title);
-        builder.setMessage(message);
-        builder.show();
-    }
     public void clearText()
     {
         inputName.setText("");
