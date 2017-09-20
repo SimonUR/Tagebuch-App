@@ -70,8 +70,8 @@ public class ReiseSingleTripActivity extends AppCompatActivity {
 
         System.out.println("Days= " + daysBetween(cal2.getTime(), cal1.getTime()));
 
-        startDate = cal2.get(Calendar.DAY_OF_MONTH) + "." + cal2.get(Calendar.MONTH) + "." + cal2.get(Calendar.YEAR);
         if (!tripName.equals("") && !startDate.equals("") && !endDate.equals("")) {
+
             addNewTrip(tripName, startDate, endDate);
         }
     }

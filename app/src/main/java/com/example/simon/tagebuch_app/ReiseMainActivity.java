@@ -214,8 +214,9 @@ public class ReiseMainActivity extends AppCompatActivity {
                     ReiseItem reise = (ReiseItem)list.getItemAtPosition(position);
 
                     String reiseName = reise.getOrt();
-                    String startDate = reise.getStartDate().toString();
-                    String endDate = reise.getEndDate().toString();
+                    String startDate = reise.getFormattedStartDate();
+                    String endDate = reise.getFormattedEndDate();
+
 
                     intentToNewActivty.putExtra("Reisename", reiseName);
                     intentToNewActivty.putExtra("Startdatum", startDate);

@@ -72,7 +72,6 @@ public class ReisenUebersichtDatabase {
                 String ort = cursor.getString(COLUMN_ORT_INDEX);
                 String startDate = cursor.getString(COLUMN_DATE_START_INDEX);
                 String endDate = cursor.getString(COLUMN_DATE_END_INDEX);
-
                 Date formattedStartDate = null;
                 Date formattedEndDate = null;
                 try {
