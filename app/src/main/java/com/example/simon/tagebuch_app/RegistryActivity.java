@@ -26,7 +26,7 @@ public class RegistryActivity extends AppCompatActivity {
         inputName = (EditText) findViewById(R.id.name);
         inputEmail = (EditText) findViewById(R.id.email);
         inputPasswort = (EditText) findViewById(R.id.passwort);
-        inputPasswortWieder = (EditText) findViewById(R.id.password_bestätigen);
+        inputPasswortWieder = (EditText) findViewById(R.id.passwort_bestaetigen);
 
 
         abschicken = (Button) findViewById(R.id.abschicken);
@@ -46,10 +46,10 @@ public class RegistryActivity extends AppCompatActivity {
         String passwort = inputPasswort.getText().toString();
         String passwortWieder = inputPasswortWieder.getText().toString();
         Boolean result = myDb.insertData(name,email,passwort);
-        if (result == true && passwort == passwortWieder )
+        if (result == true)
         {
             Toast.makeText(this, "Data Inserted Successfully", Toast.LENGTH_SHORT).show();
-            clearText();
+            //clearText();
         }else {
             Toast.makeText(this, "Data Inserted Failed!",Toast.LENGTH_SHORT).show();
         }
