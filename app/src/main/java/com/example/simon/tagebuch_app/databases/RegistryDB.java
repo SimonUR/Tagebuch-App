@@ -14,10 +14,10 @@ public class RegistryDB extends SQLiteOpenHelper{
     public static final String DATABASE_NAME = "RegistryDB";
     public static final String TABLE_NAME = "benutzer";
 
-    public static final String COL_1 = "ID";
-    public static final String COL_2 = "NAME";
-    public static final String COL_3 = "EMAIL";
-    public static final String COL_4 = "PASSWORT";
+    public static final String COL_1 = "id";
+    public static final String COL_2 = "name";
+    public static final String COL_3 = "email";
+    public static final String COL_4 = "passwort";
 
     public RegistryDB(Context context)
     {
@@ -45,7 +45,7 @@ public class RegistryDB extends SQLiteOpenHelper{
         long result = db.insert(TABLE_NAME,null,contentValues);
         db.close();
 
-        if (result== -1)
+        if (result == -1)
         {
             return false;
         }else {

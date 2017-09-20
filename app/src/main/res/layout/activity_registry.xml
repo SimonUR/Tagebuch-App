@@ -61,12 +61,12 @@
             android:paddingLeft="5dp" />
 
         <EditText
-            android:id="@+id/password_bestätigen"
+            android:id="@+id/passwort_bestaetigen"
             android:layout_width="fill_parent"
             android:layout_height="40dp"
             android:layout_marginTop="15dp"
             android:background="#f3f3f3"
-            android:hint="passwort bestätigen"
+            android:hint="passwort bestaetigen"
             android:inputType="textPassword"
             android:paddingLeft="5dp" />
 
