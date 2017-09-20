@@ -56,7 +56,7 @@
             android:layout_height="40dp"
             android:layout_marginTop="15dp"
             android:background="#f3f3f3"
-            android:hint="passwort / mind.8 Zeichen"
+            android:hint="passwort / mind.6 Zeichen"
             android:inputType="textPassword"
             android:paddingLeft="5dp" />
 

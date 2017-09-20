@@ -39,11 +39,14 @@ public class RegistryActivity extends AppCompatActivity {
         });
 
     }
+
+    private  String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+
     private void readDaten() {
-        String name = inputName.getText().toString();
-        String email = inputEmail.getText().toString();
-        String passwort = inputPasswort.getText().toString();
-        String passwortWieder = inputPasswortWieder.getText().toString();
+        String name = inputName.getText().toString().trim();
+        String email = inputEmail.getText().toString().trim();
+        String passwort = inputPasswort.getText().toString().trim();
+        String passwortWieder = inputPasswortWieder.getText().toString().trim();
         Boolean result = myDb.insertData(name,email,passwort);
         if ( result == true &&
                 name.trim().length() != 0 &&
@@ -51,13 +54,14 @@ public class RegistryActivity extends AppCompatActivity {
                 passwort.trim().length() != 0 &&
                 passwortWieder.trim().length() != 0 &&
                 passwort.equals(passwortWieder) &&
-                passwort.trim().length() >= 8)
+                passwort.trim().length() >= 6 &&
+                email.matches(emailPattern))
         {
             Toast.makeText(this, "Data Inserted Successfully", Toast.LENGTH_SHORT).show();
             clearText();
 
         }else {
-            Toast.makeText(this, "Data Inserted Failed!",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Data Inserted Failed! ",Toast.LENGTH_SHORT).show();
         }
     }
 
