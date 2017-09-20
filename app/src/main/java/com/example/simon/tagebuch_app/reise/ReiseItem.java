@@ -10,8 +10,6 @@ public class ReiseItem {
     private String ort;
     private GregorianCalendar calendarStart;
     private GregorianCalendar calendarEnd;
-    private String start;
-    private String end;
 
     public ReiseItem(String ort, int startDay, int startMonth, int startYear, int endDay, int endMonth, int endYear) {
         this.ort = ort;

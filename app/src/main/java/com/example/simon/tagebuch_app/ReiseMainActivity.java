@@ -13,6 +13,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.example.simon.tagebuch_app.databases.ReisenUebersichtDatabase;
 import com.example.simon.tagebuch_app.reise.ReiseItem;
@@ -204,11 +205,21 @@ public class ReiseMainActivity extends AppCompatActivity {
 
     // #### initListView();
         private void initListView() {
-            ListView list = (ListView) findViewById(R.id.reise_list);
+            final ListView list = (ListView) findViewById(R.id.reise_list);
             list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     Intent intentToNewActivty = new Intent(ReiseMainActivity.this, ReiseSingleTripActivity.class);
+
+                    ReiseItem reise = (ReiseItem)list.getItemAtPosition(position);
+
+                    String reiseName = reise.getOrt();
+                    String startDate = reise.getStartDate().toString();
+                    String endDate = reise.getEndDate().toString();
+
+                    intentToNewActivty.putExtra("Reisename", reiseName);
+                    intentToNewActivty.putExtra("Startdatum", startDate);
+                    intentToNewActivty.putExtra("Enddatum", endDate);
                     startActivity(intentToNewActivty);
                 }
             });

@@ -121,7 +121,6 @@ public class ReisenUebersichtDatabase {
         @Override
         public void onCreate(SQLiteDatabase db) {
             db.execSQL(DATABASE_CREATE);
-            System.out.println("DATENBANK ERSTELLT!!!!!!!!!!!!!!!");
         }
 
 
