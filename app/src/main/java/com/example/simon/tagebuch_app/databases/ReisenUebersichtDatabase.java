@@ -106,7 +106,7 @@ public class ReisenUebersichtDatabase {
     public void removeReiseItem(ReiseItem item) {
         String toDelete = KEY_ORT +"=?" + " AND " + KEY_DATE_START + "=?" + " AND " + KEY_DATE_END + "=?" + " AND " + KEY_USER_ID + "=?";
         String[] deleteArguments = new String[]{String.valueOf(item.getOrt()), String.valueOf(item.getFormattedStartDate()),
-                String.valueOf(item.getFormattedEndDate())};
+                String.valueOf(item.getFormattedEndDate()), String.valueOf(item.getUserID())};
         db.delete(DATABASE_TABLE, toDelete, deleteArguments);
     }
 
