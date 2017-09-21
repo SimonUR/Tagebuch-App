@@ -105,8 +105,10 @@ public class ReiseSingleTripActivity extends AppCompatActivity {
                 Calendar c = Calendar.getInstance();
                 c.setTime(date);
                 c.add(Calendar.DATE, i );
-                date = c.getTime();
-                addNewTrip(numberOfDay, date.toString());
+                String dateOfDay = c.get(Calendar.DAY_OF_MONTH) + "." + c.get(Calendar.MONTH) + "." + c.get(Calendar.YEAR);
+
+
+                addNewTrip(numberOfDay, dateOfDay);
             }
         }
     }
