@@ -98,8 +98,9 @@ public class ReiseSingleTripActivity extends AppCompatActivity {
 
         if (!tripName.equals("") && !startDate.equals("") && !endDate.equals("")) {
 
-            for(int i = 1; i <= lengthOfTrip; i++) {
-                String numberOfDay = "Tag " + i;
+            for(int i = 0; i <= lengthOfTrip; i++) {
+                int dayNumber = i + 1;
+                String numberOfDay = "Tag " + dayNumber;
                 Date date = formattedStartDate;
                 Calendar c = Calendar.getInstance();
                 c.setTime(date);
