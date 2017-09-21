@@ -85,20 +85,16 @@ public class ReiseSingleTripActivity extends AppCompatActivity {
         String startDate = tripInfo.get("Startdatum").toString();
         String endDate = tripInfo.get("Enddatum").toString();
 
-        Date formattedStartDate = null;
-
-
-        try{
-            formattedStartDate = new SimpleDateFormat("dd.MM.yyyy").parse(startDate);
-
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
 
         if (!tripName.equals("") && !startDate.equals("") && !endDate.equals("")) {
 
             for(int i = 0; i < lengthOfTrip; i++) {
-                Date date = formattedStartDate;
+                Date date = null;
+                try {
+                    date = new SimpleDateFormat("dd.MM.yyyy").parse(startDate);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
                 Calendar c = Calendar.getInstance();
                 c.setTime(date);
                 c.add(Calendar.DATE, i );
