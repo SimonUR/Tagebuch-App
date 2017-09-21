@@ -33,6 +33,7 @@ public class ReiseMainActivity extends AppCompatActivity {
     private ReisenAdapter reisen_adapter;
     private ReisenUebersichtDatabase reisenUebersichtDatabase;
     public static boolean startDatePicker;
+    private int userID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,27 +41,19 @@ public class ReiseMainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_reise_main);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        //setSupportActionBar(toolbar);
-
         // Datenbank für Orte initialisieren
         initDatabase();
         // ArrayList für Reisen initialisieren
         initReiseList();
         //UI
         initUI();
+        assignUserId();
         updateList();
+    }
 
-        /*
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-        */
+    private void assignUserId() {
+        Intent intent = getIntent();
+        userID = intent.getExtras().getInt("ID");
     }
 
     // zurück-Button in Actionbar
@@ -160,11 +153,11 @@ public class ReiseMainActivity extends AppCompatActivity {
                 ort_input.setText("");
                 start_input.setText("");
                 end_input.setText("");
-                addNewReise(ort, start, end);
+                addNewReise(ort, start, end, userID);
             }
 
         }
-        private void addNewReise(String ort, String start, String end) {
+        private void addNewReise(String ort, String start, String end , int id) {
 
             Date startDate = getDateFromString(start);
             Date endDate = getDateFromString(end);
@@ -175,7 +168,7 @@ public class ReiseMainActivity extends AppCompatActivity {
             calendarEnd.setTime(endDate);
 
             ReiseItem newReise = new ReiseItem(ort, calendarStart.get(Calendar.DAY_OF_MONTH), calendarStart.get(Calendar.MONTH), calendarStart.get(Calendar.YEAR),
-                    calendarEnd.get(Calendar.DAY_OF_MONTH), calendarEnd.get(Calendar.MONTH), calendarEnd.get(Calendar.YEAR));
+                    calendarEnd.get(Calendar.DAY_OF_MONTH), calendarEnd.get(Calendar.MONTH), calendarEnd.get(Calendar.YEAR), id);
 
             reisenUebersichtDatabase.insertReiseItem(newReise);
 
@@ -198,7 +191,7 @@ public class ReiseMainActivity extends AppCompatActivity {
 
     private void updateList() {
         reisen.clear();
-        reisen.addAll(reisenUebersichtDatabase.getAllReiseItems());
+        reisen.addAll(reisenUebersichtDatabase.getAllReiseItemsForUser(userID));
         reisen_adapter.notifyDataSetChanged();
     }
 

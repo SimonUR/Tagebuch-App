@@ -29,10 +29,12 @@ public class ReisenUebersichtDatabase {
     public static final String KEY_ORT = "ort";
     public static final String KEY_DATE_START = "date_start";
     public static final String KEY_DATE_END = "date_end";
+    public static final String KEY_USER_ID = "user_id";
 
     public static final int COLUMN_ORT_INDEX = 1;
     public static final int COLUMN_DATE_START_INDEX = 2;
     public static final int COLUMN_DATE_END_INDEX = 3;
+    public static final int COLUMN_USER_ID_INDEX = 4;
 
     private ReisenUebersichtDatabaseHelper dbHelper;
     private SQLiteDatabase db;
@@ -59,19 +61,21 @@ public class ReisenUebersichtDatabase {
         itemValues.put(KEY_ORT, item.getOrt());
         itemValues.put(KEY_DATE_START, item.getFormattedStartDate());
         itemValues.put(KEY_DATE_END, item.getFormattedEndDate());
+        itemValues.put(KEY_USER_ID, item.getUserID());
         return db.insert(DATABASE_TABLE, null, itemValues);
     }
 
-    public ArrayList<ReiseItem> getAllReiseItems() {
+    public ArrayList<ReiseItem> getAllReiseItemsForUser(int userID) {
         ArrayList<ReiseItem> items = new ArrayList<ReiseItem>();
-        Cursor cursor = db.query(DATABASE_TABLE, new String[] { KEY_ID,
-                KEY_ORT, KEY_DATE_START, KEY_DATE_END }, null, null, null, null, null);
+        String query = "SELECT * FROM " + DATABASE_TABLE + " WHERE " + KEY_USER_ID + " = " + userID;
+        Cursor cursor = db.rawQuery(query,null);
 
         if (cursor.moveToFirst()) {
             do {
                 String ort = cursor.getString(COLUMN_ORT_INDEX);
                 String startDate = cursor.getString(COLUMN_DATE_START_INDEX);
                 String endDate = cursor.getString(COLUMN_DATE_END_INDEX);
+                int id = cursor.getInt(COLUMN_USER_ID_INDEX);
                 Date formattedStartDate = null;
                 Date formattedEndDate = null;
                 try {
@@ -91,7 +95,7 @@ public class ReisenUebersichtDatabase {
                 calendarEnd.setTime(formattedEndDate);
 
                 items.add(new ReiseItem(ort, calendarStart.get(Calendar.DAY_OF_MONTH), calendarStart.get(Calendar.MONTH), calendarStart.get(Calendar.YEAR),
-                        calendarEnd.get(Calendar.DAY_OF_MONTH), calendarEnd.get(Calendar.MONTH), calendarEnd.get(Calendar.YEAR)));
+                        calendarEnd.get(Calendar.DAY_OF_MONTH), calendarEnd.get(Calendar.MONTH), calendarEnd.get(Calendar.YEAR), id));
 
             } while (cursor.moveToNext());
         }
@@ -99,7 +103,7 @@ public class ReisenUebersichtDatabase {
     }
 
     public void removeReiseItem(ReiseItem item) {
-        String toDelete = KEY_ORT +"=?" + " AND " + KEY_DATE_START + "=?" + " AND " + KEY_DATE_END + "=?";
+        String toDelete = KEY_ORT +"=?" + " AND " + KEY_DATE_START + "=?" + " AND " + KEY_DATE_END + "=?" + " AND " + KEY_USER_ID + "=?";
         String[] deleteArguments = new String[]{String.valueOf(item.getOrt()), String.valueOf(item.getFormattedStartDate()),
                 String.valueOf(item.getFormattedEndDate())};
         db.delete(DATABASE_TABLE, toDelete, deleteArguments);
@@ -110,7 +114,7 @@ public class ReisenUebersichtDatabase {
         private final String DATABASE_CREATE = "create table "
                 + DATABASE_TABLE + " (" + KEY_ID
                 + " integer primary key autoincrement, " + KEY_ORT
-                + " text not null, " + KEY_DATE_START + " text, "  + KEY_DATE_END + " text);";
+                + " text not null, " + KEY_DATE_START + " text, "  + KEY_DATE_END + " text, " + KEY_USER_ID + " integer);";
 
         public ReisenUebersichtDatabaseHelper(Context c, String dbname,
                                               SQLiteDatabase.CursorFactory factory, int version) {

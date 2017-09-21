@@ -83,6 +83,8 @@ public class LoginActivity extends AppCompatActivity{
                 db.open();
                 if(db.checkLogInInfo(mEmailView.getText().toString(), mPasswordView.getText().toString())){
                     Intent intent = new Intent(LoginActivity.this, ReiseMainActivity.class);
+                    int userID = db.getUserID(mEmailView.getText().toString(), mPasswordView.getText().toString());
+                    intent.putExtra("ID", userID);
                     startActivity(intent);
                 }else{
                     Toast.makeText(LoginActivity.this, "Benutzer existiert nicht!", Toast.LENGTH_SHORT).show();

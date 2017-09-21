@@ -10,11 +10,13 @@ public class ReiseItem {
     private String ort;
     private GregorianCalendar calendarStart;
     private GregorianCalendar calendarEnd;
+    private int userID;
 
-    public ReiseItem(String ort, int startDay, int startMonth, int startYear, int endDay, int endMonth, int endYear) {
+    public ReiseItem(String ort, int startDay, int startMonth, int startYear, int endDay, int endMonth, int endYear, int userID) {
         this.ort = ort;
         calendarStart = new GregorianCalendar(startYear, startMonth, startDay);
         calendarEnd = new GregorianCalendar(endYear, endMonth, endDay);
+        this.userID = userID;
     }
 
     public String getFormattedStartDate(){
@@ -37,6 +39,10 @@ public class ReiseItem {
 
     public Date getEndDate(){
         return calendarEnd.getTime();
+    }
+
+    public int getUserID(){
+        return userID;
     }
 
 

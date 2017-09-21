@@ -54,6 +54,16 @@ public class RegistryDB {
         db.close();
     }
 
+    public int getUserID(String email, String password){
+        String query = "SELECT "+ COL_1 + " FROM " + TABLE_NAME + " WHERE " + COL_4 + " = '"
+                + password + "' AND " + COL_3 + " = '" + email + "'";
+        int id;
+            Cursor cursor = db.rawQuery(query, null);
+                cursor.moveToFirst();
+                id = cursor.getInt(0);
+        return id;
+    }
+
     public boolean checkLogInInfo(String email, String password){
         String query = "SELECT * " + " FROM " + TABLE_NAME + " WHERE " + COL_4 + " = '"
                 + password + "' AND " + COL_3 + " = '" + email + "'";
