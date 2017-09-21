@@ -35,7 +35,6 @@ public class ReiseSingleTripActivity extends AppCompatActivity {
             assignLengthOfTrip();
             initReiseTageList();
             assignUserId();
-            addDaysToList();
             updateList();
 
 
@@ -121,13 +120,12 @@ public class ReiseSingleTripActivity extends AppCompatActivity {
         Reisetag newTripDay = new Reisetag(day, date, userID);
         reiseTagedb.insertReiseDay(newTripDay);
         reiseTage.add(newTripDay);
-        updateList();
         reisetage_adapter.notifyDataSetChanged();
     }
 
     private void updateList() {
         reiseTage.clear();
-        reiseTage.addAll(reiseTagedb.getAllReiseDaysForUser(userID));
+        addDaysToList();
         reisetage_adapter.notifyDataSetChanged();
     }
 
