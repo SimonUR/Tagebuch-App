@@ -54,7 +54,7 @@ public class RegistryDB {
         db.close();
     }
 
-    public boolean checkLogInInfo(String email, String password){
+    public boolean checkLogInInfo(String password){
         String checkerSQLSTATEMENT = "SELECT " + COL_2 + " FROM " + TABLE_NAME + " WHERE " + COL_4 + " = '"
                 + password + "'";
         Cursor cursor = db.rawQuery(checkerSQLSTATEMENT, null);

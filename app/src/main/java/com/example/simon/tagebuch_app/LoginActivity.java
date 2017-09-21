@@ -39,6 +39,7 @@ import static android.Manifest.permission.READ_CONTACTS;
 
 /**
  * A login screen that offers login via email/password.
+ * datenbank muss nach login noch geschlossen werden da ondestroy in registreyactivty noch gebracuht wird!!!!
  */
 public class LoginActivity extends AppCompatActivity{
 
@@ -55,14 +56,12 @@ public class LoginActivity extends AppCompatActivity{
     private Button skipToReiseMain;
     private Button signInButton;
 
-    private RegistryDB db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         // Set up the login form.
-        initDatabase();
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
         createSkipButtons();
         mPasswordView = (EditText) findViewById(R.id.password);
@@ -80,23 +79,16 @@ public class LoginActivity extends AppCompatActivity{
         signInButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                db.checkLogInInfo("test", "hallo");
-                attemptLogin();
+
+                    RegistryDB db = new RegistryDB(LoginActivity.this);
+                            db.open();
+                            db.checkLogInInfo(mPasswordView.getText().toString());
+                    attemptLogin();
             }
         });
 
     }
 
-    @Override
-    protected void onDestroy(){
-        db.close();
-        super.onDestroy();
-    }
-
-    private void initDatabase() {
-        db = new RegistryDB(this);
-        db.open();
-    }
 
     /**
      * Attempts to sign in or register the account specified by the login form.
@@ -111,11 +103,6 @@ public class LoginActivity extends AppCompatActivity{
 
     }
 
-    private boolean isEmailValid(String email) {
-        //TODO: Replace this with your own logic
-        return email.contains("@");
-    }
-
     private boolean isPasswordValid(String password) {
         Boolean validPassword = false;
         if(validPassword){
@@ -123,11 +110,6 @@ public class LoginActivity extends AppCompatActivity{
         }
         return false;
     }
-
-
-
-
-
 
 
 

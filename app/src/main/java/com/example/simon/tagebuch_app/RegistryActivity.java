@@ -1,5 +1,6 @@
 package com.example.simon.tagebuch_app;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -13,7 +14,7 @@ public class RegistryActivity extends AppCompatActivity {
 
     private EditText inputName, inputEmail, inputPasswort, inputPasswortWieder;
     private Button abschicken;
-    private RegistryDB myDb;
+    public static RegistryDB myDb;
 
 
     @Override
@@ -21,33 +22,43 @@ public class RegistryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registry);
 
-        myDb = new RegistryDB(this);
+        initDatabase();
+
         inputName = (EditText) findViewById(R.id.name);
         inputEmail = (EditText) findViewById(R.id.email);
         inputPasswort = (EditText) findViewById(R.id.passwort);
         inputPasswortWieder = (EditText) findViewById(R.id.passwort_bestaetigen);
-
 
         abschicken = (Button) findViewById(R.id.abschicken);
 
         abschicken.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                readDaten();
+                if(readDaten()){
+                    Intent intent = new Intent(RegistryActivity.this, LoginActivity.class);
+                    startActivity(intent);
+                }
             }
-
         });
+    }
 
+    @Override
+    protected void onDestroy(){
+        myDb.close();
+        super.onDestroy();
+    }
+    private void initDatabase() {
+        myDb = new RegistryDB(this);
+        myDb.open();
     }
 
     private String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
 
-    private void readDaten() {
+    private boolean readDaten() {
         String name = inputName.getText().toString().trim();
         String email = inputEmail.getText().toString().trim();
         String passwort = inputPasswort.getText().toString().trim();
         String passwortWieder = inputPasswortWieder.getText().toString().trim();
-        //Boolean result = myDb.insertData(name,email,passwort);
         if (name.trim().length() != 0 &&
                 email.trim().length() != 0 &&
                 passwort.trim().length() != 0 &&
@@ -59,9 +70,11 @@ public class RegistryActivity extends AppCompatActivity {
             myDb.insertData(name,email,passwort);
             Toast.makeText(this, "Data Inserted Successfully", Toast.LENGTH_SHORT).show();
             clearText();
+            return true;
 
         }else {
             Toast.makeText(this, "Data Inserted Failed! ",Toast.LENGTH_SHORT).show();
+            return false;
         }
     }
 
@@ -72,6 +85,6 @@ public class RegistryActivity extends AppCompatActivity {
         inputPasswort.setText("");
         inputPasswortWieder.setText("");
     }
-    }
+}
 
 
