@@ -54,7 +54,6 @@ public class LoginActivity extends AppCompatActivity{
     private AutoCompleteTextView mEmailView;
     private EditText mPasswordView;
     private Button skipToRegistryActivity;
-    private Button skipToReiseMain;
     private Button signInButton;
 
 
@@ -100,14 +99,6 @@ public class LoginActivity extends AppCompatActivity{
      * errors are presented and no actual login attempt is made.
      */
 
-    private boolean isPasswordValid(String password) {
-        Boolean validPassword = false;
-        if(validPassword){
-            return true;
-        }
-        return false;
-    }
-
 
 
     private void createSkipButtons() {
@@ -117,16 +108,6 @@ public class LoginActivity extends AppCompatActivity{
             public void onClick(View v) {
                 Intent intent = new Intent(LoginActivity.this, RegistryActivity.class);
                 startActivity(intent);
-            }
-        });
-
-
-        skipToReiseMain = (Button) findViewById(R.id.skipToReiseMain);
-        skipToReiseMain.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final Intent intent1 = new Intent(LoginActivity.this, ReiseMainActivity.class);
-                startActivity(intent1);
             }
         });
     }
