@@ -40,7 +40,7 @@ public class RegistryActivity extends AppCompatActivity {
 
     }
 
-    private  String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+    private String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
 
     private void readDaten() {
         String name = inputName.getText().toString().trim();
