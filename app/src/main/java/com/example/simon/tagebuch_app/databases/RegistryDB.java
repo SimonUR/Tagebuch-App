@@ -61,6 +61,7 @@ public class RegistryDB {
             Cursor cursor = db.rawQuery(query, null);
                 cursor.moveToFirst();
                 id = cursor.getInt(0);
+        cursor.close();
         return id;
     }
 

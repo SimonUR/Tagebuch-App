@@ -209,10 +209,12 @@ public class ReiseMainActivity extends AppCompatActivity {
                     String reiseName = reise.getOrt();
                     String startDate = reise.getFormattedStartDate();
                     String endDate = reise.getFormattedEndDate();
+                    int userId = reise.getUserID();
 
                     intentToNewActivty.putExtra("Reisename", reiseName);
                     intentToNewActivty.putExtra("Startdatum", startDate);
                     intentToNewActivty.putExtra("Enddatum", endDate);
+                    intentToNewActivty.putExtra("Id", userId);
 
                     startActivity(intentToNewActivty);
                 }

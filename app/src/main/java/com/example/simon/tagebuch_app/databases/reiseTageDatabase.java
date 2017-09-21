@@ -23,14 +23,14 @@ public class reiseTageDatabase {
 
     private static final String DATABASE_TABLE = "reiseTage";
 
-    public static final String KEY_ID = "_id";
-    public static final String KEY_TAG = "tag";
-    public static final String KEY_ORT = "ort";
-    public static final String KEY_DATE = "date";
+    private static final String KEY_ID = "_id";
+    private static final String KEY_TAG = "tag";
+    private static final String KEY_DATE = "date";
+    private static final String KEY_USER_ID = "user_id";
 
-    public static final int COLUMN_TAG_INDEX = 1;
-    public static final int COLUMN_ORT_INDEX = 2;
-    public static final int COLUMN_DATE_INDEX = 3;
+    private static final int COLUMN_TAG_INDEX = 1;
+    private static final int COLUMN_DATE_INDEX = 2;
+    private static final int COLUMN_USER_ID_INDEX = 3;
 
     private reiseTagedbHelper dbHelper;
     private SQLiteDatabase db;
@@ -54,27 +54,27 @@ public class reiseTageDatabase {
     public long insertReiseDay(Reisetag reisetag){
         ContentValues itemValues = new ContentValues();
         itemValues.put(KEY_TAG, reisetag.getReiseTag());
-        itemValues.put(KEY_ORT, reisetag.getReiseOrt());
         itemValues.put(KEY_DATE, reisetag.getDate());
+        itemValues.put(KEY_USER_ID, reisetag.getUserID());
         return db.insert(DATABASE_TABLE, null, itemValues);
     }
 
-    public ArrayList<Reisetag> getAllReiseDays() {
+    public ArrayList<Reisetag> getAllReiseDaysForUser(int userId) {
         ArrayList<Reisetag> items = new ArrayList<Reisetag>();
-        Cursor cursor = db.query(DATABASE_TABLE, new String[] { KEY_ID ,KEY_TAG,
-                KEY_ORT, KEY_DATE}, null, null, null, null, null);
+        String query = "SELECT * FROM " + DATABASE_TABLE + " WHERE " + KEY_USER_ID + " = " + userId;
+        Cursor cursor = db.rawQuery(query, null);
 
         if (cursor.moveToFirst()) {
             do {
                 String tag = cursor.getString(COLUMN_TAG_INDEX);
-                String ort = cursor.getString(COLUMN_ORT_INDEX);
                 String date = cursor.getString(COLUMN_DATE_INDEX);
+                int id = cursor.getInt(COLUMN_USER_ID_INDEX);
 
-
-                items.add(new Reisetag(tag, ort, date));
+                items.add(new Reisetag(tag, date, id));
 
             } while (cursor.moveToNext());
         }
+        cursor.close();
         return items;
     }
 
@@ -82,7 +82,7 @@ public class reiseTageDatabase {
         private final String DATABASE_CREATE = "create table "
                 + DATABASE_TABLE + " (" + KEY_ID
                 + " integer primary key autoincrement, " + KEY_TAG
-                + " text not null, " + KEY_ORT + " text, "  + KEY_DATE + " text);";
+                + " text not null, "  + KEY_DATE + " text, " + KEY_USER_ID + " integer);";
 
         public reiseTagedbHelper(Context c, String dbname, SQLiteDatabase.CursorFactory factory, int version) {
             super(c, dbname, factory, version);

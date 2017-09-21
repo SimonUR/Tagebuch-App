@@ -7,25 +7,25 @@ package com.example.simon.tagebuch_app.reise;
 public class Reisetag {
 
     private String reiseTag;
-    private String reiseOrt;
     private String date;
+    private int userID;
 
     public String getReiseTag() {
         return reiseTag;
-    }
-
-    public String getReiseOrt() {
-        return reiseOrt;
     }
 
     public String getDate() {
         return date;
     }
 
-    public Reisetag(String reiseTag, String reiseOrt, String date){
+    public int getUserID(){
+        return userID;
+    }
+
+    public Reisetag(String reiseTag, String date, int userID){
         this.reiseTag = reiseTag;
-        this.reiseOrt = reiseOrt;
         this.date = date;
+        this.userID = userID;
 
     }
 

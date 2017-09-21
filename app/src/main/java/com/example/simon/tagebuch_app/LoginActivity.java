@@ -48,6 +48,7 @@ public class LoginActivity extends AppCompatActivity{
      * Id to identity READ_CONTACTS permission request.
      */
     private static final int REQUEST_READ_CONTACTS = 0;
+    private RegistryDB db;
 
 
     // UI references.
@@ -79,7 +80,7 @@ public class LoginActivity extends AppCompatActivity{
         signInButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                RegistryDB db = new RegistryDB(LoginActivity.this);
+                db = new RegistryDB(LoginActivity.this);
                 db.open();
                 if(db.checkLogInInfo(mEmailView.getText().toString(), mPasswordView.getText().toString())){
                     Intent intent = new Intent(LoginActivity.this, ReiseMainActivity.class);
@@ -92,6 +93,12 @@ public class LoginActivity extends AppCompatActivity{
             }
         });
 
+    }
+
+    @Override
+    protected void onDestroy(){
+        db.close();
+        super.onDestroy();
     }
 
 

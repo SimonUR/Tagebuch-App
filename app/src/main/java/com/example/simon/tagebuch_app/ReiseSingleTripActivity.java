@@ -24,17 +24,52 @@ public class ReiseSingleTripActivity extends AppCompatActivity {
     private ArrayList<Reisetag> reiseTage = new ArrayList<Reisetag>();
     private adapterFuerReiseTage reisetage_adapter;
     private reiseTageDatabase reiseTagedb;
-
+    private int userID;
+    private int lengthOfTrip = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reise_single_trip);
             initDatabase();
+            assignLengthOfTrip();
             initReiseTageList();
+            assignUserId();
             addDaysToList();
+            updateList();
 
 
+    }
+
+    private void assignLengthOfTrip() {
+        Intent intent = getIntent();
+        Bundle tripInfo = intent.getExtras();
+        String startDate = tripInfo.get("Startdatum").toString();
+        String endDate = tripInfo.get("Enddatum").toString();
+
+        Date formattedStartDate = null;
+        Date formattedEndDate = null;
+
+
+        try{
+            formattedStartDate = new SimpleDateFormat("dd.MM.yyyy").parse(startDate);
+            formattedEndDate = new SimpleDateFormat("dd.MM.yyyy").parse(endDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        Calendar calStart = Calendar.getInstance(Locale.GERMAN);
+        Calendar calEnd = Calendar.getInstance(Locale.GERMAN);
+
+        calEnd.setTime(formattedEndDate);
+        calStart.setTime(formattedStartDate);
+
+        lengthOfTrip += daysBetween(calStart.getTime(), calEnd.getTime());
+    }
+
+    private void assignUserId() {
+        Intent intent = getIntent();
+        userID = intent.getExtras().getInt("Id");
     }
 
     @Override
@@ -52,27 +87,26 @@ public class ReiseSingleTripActivity extends AppCompatActivity {
         String endDate = tripInfo.get("Enddatum").toString();
 
         Date formattedStartDate = null;
-        Date formattedEndDate = null;
 
 
         try{
             formattedStartDate = new SimpleDateFormat("dd.MM.yyyy").parse(startDate);
-            formattedEndDate = new SimpleDateFormat("dd.MM.yyyy").parse(endDate);
+
         } catch (ParseException e) {
             e.printStackTrace();
         }
 
-        Calendar cal2 = Calendar.getInstance(Locale.GERMAN);
-        Calendar cal1 = Calendar.getInstance(Locale.GERMAN);
-
-        cal1.setTime(formattedEndDate);
-        cal2.setTime(formattedStartDate);
-
-        System.out.println("Days= " + daysBetween(cal2.getTime(), cal1.getTime()));
-
         if (!tripName.equals("") && !startDate.equals("") && !endDate.equals("")) {
 
-            addNewTrip(tripName, startDate, endDate);
+            for(int i = 1; i <= lengthOfTrip; i++) {
+                String numberOfDay = "Tag " + i;
+                Date date = formattedStartDate;
+                Calendar c = Calendar.getInstance();
+                c.setTime(date);
+                c.add(Calendar.DATE, i );
+                date = c.getTime();
+                addNewTrip(numberOfDay, date.toString());
+            }
         }
     }
 
@@ -80,8 +114,8 @@ public class ReiseSingleTripActivity extends AppCompatActivity {
         return (int)( (d2.getTime() - d1.getTime()) / (1000 * 60 * 60 * 24));
     }
 
-    private void addNewTrip(String tripName, String startDate, String endDate) {
-        Reisetag newTripDay = new Reisetag(tripName, startDate, endDate);
+    private void addNewTrip(String day, String date) {
+        Reisetag newTripDay = new Reisetag(day, date, userID);
         reiseTagedb.insertReiseDay(newTripDay);
         reiseTage.add(newTripDay);
         updateList();
@@ -90,7 +124,7 @@ public class ReiseSingleTripActivity extends AppCompatActivity {
 
     private void updateList() {
         reiseTage.clear();
-        reiseTage.addAll(reiseTagedb.getAllReiseDays());
+        reiseTage.addAll(reiseTagedb.getAllReiseDaysForUser(userID));
         reisetage_adapter.notifyDataSetChanged();
     }
 

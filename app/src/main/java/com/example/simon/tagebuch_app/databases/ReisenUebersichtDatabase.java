@@ -25,16 +25,16 @@ public class ReisenUebersichtDatabase {
 
     private static final String DATABASE_TABLE = "reisen";
 
-    public static final String KEY_ID = "_id";
-    public static final String KEY_ORT = "ort";
-    public static final String KEY_DATE_START = "date_start";
-    public static final String KEY_DATE_END = "date_end";
-    public static final String KEY_USER_ID = "user_id";
+    private static final String KEY_ID = "_id";
+    private static final String KEY_ORT = "ort";
+    private static final String KEY_DATE_START = "date_start";
+    private static final String KEY_DATE_END = "date_end";
+    private static final String KEY_USER_ID = "user_id";
 
-    public static final int COLUMN_ORT_INDEX = 1;
-    public static final int COLUMN_DATE_START_INDEX = 2;
-    public static final int COLUMN_DATE_END_INDEX = 3;
-    public static final int COLUMN_USER_ID_INDEX = 4;
+    private static final int COLUMN_ORT_INDEX = 1;
+    private static final int COLUMN_DATE_START_INDEX = 2;
+    private static final int COLUMN_DATE_END_INDEX = 3;
+    private static final int COLUMN_USER_ID_INDEX = 4;
 
     private ReisenUebersichtDatabaseHelper dbHelper;
     private SQLiteDatabase db;
@@ -99,6 +99,7 @@ public class ReisenUebersichtDatabase {
 
             } while (cursor.moveToNext());
         }
+        cursor.close();
         return items;
     }
 
@@ -107,7 +108,6 @@ public class ReisenUebersichtDatabase {
         String[] deleteArguments = new String[]{String.valueOf(item.getOrt()), String.valueOf(item.getFormattedStartDate()),
                 String.valueOf(item.getFormattedEndDate())};
         db.delete(DATABASE_TABLE, toDelete, deleteArguments);
-        System.out.println(toDelete);
     }
 
     private class ReisenUebersichtDatabaseHelper extends SQLiteOpenHelper {

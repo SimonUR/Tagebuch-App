@@ -42,11 +42,9 @@ public class adapterFuerReiseTage extends ArrayAdapter<Reisetag>{
 
         if (dayOfTrip != null) {
             TextView reiseOrt = (TextView) v.findViewById(R.id.reiseTag);
-            TextView reiseBegin = (TextView) v.findViewById(R.id.reiseOrt);
             TextView reiseEnd = (TextView) v.findViewById(R.id.datum);
 
             reiseOrt.setText(dayOfTrip.getReiseTag());
-            reiseBegin.setText(dayOfTrip.getReiseOrt());
             reiseEnd.setText(dayOfTrip.getDate());
         }
 
