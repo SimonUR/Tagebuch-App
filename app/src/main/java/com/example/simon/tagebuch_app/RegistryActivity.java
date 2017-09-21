@@ -27,7 +27,7 @@ public class RegistryActivity extends AppCompatActivity {
         inputName = (EditText) findViewById(R.id.name);
         inputEmail = (EditText) findViewById(R.id.email);
         inputPasswort = (EditText) findViewById(R.id.passwort);
-        inputPasswortWieder = (EditText) findViewById(R.id.passwort_bestaetigen);
+        inputPasswortWieder = (EditText) findViewById(R.id.passwort_bestätigen);
 
         abschicken = (Button) findViewById(R.id.abschicken);
 

@@ -6,10 +6,10 @@
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-
-
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -27,9 +27,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".RegistryActivity"
+        <activity
+            android:name=".RegistryActivity"
             android:label="REGISTRIEREN"
-            android:theme="@style/AppTheme"/>
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".ReiseMainActivity"
             android:label="@string/title_activity_reise_main"
@@ -39,7 +40,8 @@
             android:label="@string/title_activity_reise_single_trip"
             android:theme="@style/AppTheme" />
         <activity android:name=".ReiseSingleDayActivity" />
-        <activity android:name=".ReiseSingleTripAddDayActivity"></activity>
+        <activity android:name=".ReiseSingleTripAddDayActivity" />
+        <activity android:name=".reise.GPSActivity"></activity>
     </application>
 
 </manifest>
