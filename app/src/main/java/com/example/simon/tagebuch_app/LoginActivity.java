@@ -29,6 +29,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.simon.tagebuch_app.databases.RegistryDB;
 
@@ -79,11 +80,14 @@ public class LoginActivity extends AppCompatActivity{
         signInButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                    RegistryDB db = new RegistryDB(LoginActivity.this);
-                            db.open();
-                            db.checkLogInInfo(mPasswordView.getText().toString());
-                    attemptLogin();
+                RegistryDB db = new RegistryDB(LoginActivity.this);
+                db.open();
+                if(db.checkLogInInfo(mEmailView.getText().toString(), mPasswordView.getText().toString())){
+                    Intent intent = new Intent(LoginActivity.this, ReiseMainActivity.class);
+                    startActivity(intent);
+                }else{
+                    Toast.makeText(LoginActivity.this, "Benutzer existiert nicht!", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -95,13 +99,6 @@ public class LoginActivity extends AppCompatActivity{
      * If there are form errors (invalid email, missing fields, etc.), the
      * errors are presented and no actual login attempt is made.
      */
-    private void attemptLogin() {
-        if (isPasswordValid(mPasswordView.getText().toString())){
-            Intent intent = new Intent(LoginActivity.this, ReiseMainActivity.class);
-            startActivity(intent);
-        }
-
-    }
 
     private boolean isPasswordValid(String password) {
         Boolean validPassword = false;

@@ -54,14 +54,17 @@ public class RegistryDB {
         db.close();
     }
 
-    public boolean checkLogInInfo(String password){
-        String checkerSQLSTATEMENT = "SELECT " + COL_2 + " FROM " + TABLE_NAME + " WHERE " + COL_4 + " = '"
-                + password + "'";
-        Cursor cursor = db.rawQuery(checkerSQLSTATEMENT, null);
-        cursor.moveToFirst();
-        System.out.println(cursor.getString(0));
+    public boolean checkLogInInfo(String email, String password){
+        String query = "SELECT * " + " FROM " + TABLE_NAME + " WHERE " + COL_4 + " = '"
+                + password + "' AND " + COL_3 + " = '" + email + "'";
+        Cursor cursor = db.rawQuery(query, null);
+        if(cursor.getCount() <= 0){
+            cursor.close();
 
-        return false;
+            return false;
+        }
+        cursor.close();
+        return true;
     }
 
     public boolean insertData(String name, String email, String passwort)
