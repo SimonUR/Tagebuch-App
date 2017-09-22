@@ -54,6 +54,7 @@ public class LoginActivity extends AppCompatActivity{
     private AutoCompleteTextView mEmailView;
     private EditText mPasswordView;
     private Button signInButton;
+    private Button registryButton;
 
 
     @Override
@@ -89,6 +90,15 @@ public class LoginActivity extends AppCompatActivity{
                 }
             }
         });
+        registryButton = (Button) findViewById(R.id.skipToRegistryActivity);
+        registryButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this, RegistryActivity.class);
+                startActivity(intent);
+            }
+        });
+
 
     }
 
