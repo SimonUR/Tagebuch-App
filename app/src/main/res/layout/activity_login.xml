@@ -78,12 +78,6 @@
                 android:layout_height="wrap_content"
                 android:text="@string/skipToRegistry" />
 
-            <Button
-                android:id="@+id/skipToReiseMain"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/skipToReiseMain" />
-
         </LinearLayout>
     </ScrollView>
 </LinearLayout>
