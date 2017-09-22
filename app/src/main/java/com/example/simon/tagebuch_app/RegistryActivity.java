@@ -67,7 +67,7 @@ public class RegistryActivity extends AppCompatActivity {
                 passwort.trim().length() >= 6 &&
                 email.matches(emailPattern))
         {
-            myDb.insertData(name,email,passwort);
+            myDb.insertUserInDb(name,email,passwort);
             Toast.makeText(this, "Data Inserted Successfully", Toast.LENGTH_SHORT).show();
             clearText();
             return true;

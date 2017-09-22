@@ -53,7 +53,6 @@ public class LoginActivity extends AppCompatActivity{
     // UI references.
     private AutoCompleteTextView mEmailView;
     private EditText mPasswordView;
-    private Button skipToRegistryActivity;
     private Button signInButton;
 
 
@@ -63,7 +62,6 @@ public class LoginActivity extends AppCompatActivity{
         setContentView(R.layout.activity_login);
         // Set up the login form.
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
-        createSkipButtons();
         mPasswordView = (EditText) findViewById(R.id.password);
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
@@ -100,24 +98,5 @@ public class LoginActivity extends AppCompatActivity{
         super.onDestroy();
     }
 
-
-    /**
-     * Attempts to sign in or register the account specified by the login form.
-     * If there are form errors (invalid email, missing fields, etc.), the
-     * errors are presented and no actual login attempt is made.
-     */
-
-
-
-    private void createSkipButtons() {
-        skipToRegistryActivity = (Button) findViewById(R.id.skipToRegistryActivity);
-        skipToRegistryActivity.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(LoginActivity.this, RegistryActivity.class);
-                startActivity(intent);
-            }
-        });
-    }
 }
 

@@ -1,9 +1,31 @@
-<?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.simon.tagebuch_app.ReiseSingleDayActivity">
+    android:orientation="vertical"
+    android:weightSum="1">
 
-</android.support.constraint.ConstraintLayout>
+    <TextView
+        android:id="@+id/infoText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.10"
+        android:text="@string/infotext"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textColor="@color/colorAccent"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/textByUser"
+        android:layout_width="195dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.15" />
+
+    <Button
+        android:id="@+id/assignLocationButton"
+        android:layout_width="389dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.10"
+        android:text="@string/locationButtonText" />
+</LinearLayout>

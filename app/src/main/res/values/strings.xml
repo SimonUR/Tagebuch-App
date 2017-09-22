@@ -26,7 +26,9 @@
 
 
 
-    <!-- Strings related to ReiseSingleTripActivity -->
+    <!-- Strings related to ReiseSingleDayActivity -->
+    <string name="infotext">Insert you personal Memory of the Day.</string>
+    <string name="locationButtonText">Press to assign your current Location.</string>
 
 
 </resources>

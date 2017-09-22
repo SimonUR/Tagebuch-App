@@ -6,6 +6,8 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.example.simon.tagebuch_app.databases.reiseTageDatabase;
@@ -126,7 +128,20 @@ public class ReiseSingleTripActivity extends AppCompatActivity {
     }
 
     private void initListView() {
-        ListView list = (ListView) findViewById(R.id.reisetage_list);
+        final ListView list = (ListView) findViewById(R.id.reisetage_list);
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent getToDayActivity = new Intent(ReiseSingleTripActivity.this, ReiseSingleDayActivity.class);
+                Reisetag selectedDay = (Reisetag)list.getItemAtPosition(position);
+                String day = selectedDay.getReiseTag();
+                String date = selectedDay.getDate();
+                getToDayActivity.putExtra("Day", day);
+                getToDayActivity.putExtra("Date", date);
+                getToDayActivity.putExtra("UserId", userID);
+                startActivity(getToDayActivity);
+            }
+        });
         reisetage_adapter = new adapterFuerReiseTage(this, reiseTage);
         list.setAdapter(reisetage_adapter);
     }

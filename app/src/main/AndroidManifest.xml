@@ -40,7 +40,6 @@
             android:label="@string/title_activity_reise_single_trip"
             android:theme="@style/AppTheme" />
         <activity android:name=".ReiseSingleDayActivity" />
-        <activity android:name=".ReiseSingleTripAddDayActivity" />
         <activity android:name=".reise.GPSActivity"></activity>
     </application>
 

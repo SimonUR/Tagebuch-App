@@ -22,16 +22,25 @@ public class RegistryDB {
     public static final String DATABASE_NAME = "Registry.db";
     private static final int DATABASE_VERSION = 1;
     public static final String TABLE_NAME = "benutzer";
+    private static final String SINGLE_DAY_TABLE_NAME = "singleday";
 
     public static final String COL_1 = "id";
     public static final String COL_2 = "name";
     public static final String COL_3 = "email";
     public static final String COL_4 = "passwort";
 
-    public static final int COL_id = 0;
-    public static final int COL_name = 1;
-    public static final int COL_email = 2;
-    public static final int COL_password = 3;
+    private static final String SINGLE_DAY_DB_KEY_ID = "id";
+    private static final String SINGLE_DAY_DB_KEY_TEXT = "usertext";
+    private static final String SINGLE_DAY_DB_KEY_IMAGE = "image";
+    private static final String SINGLE_DAY_DB_KEY_LOCATION_LAT = "latitude";
+    private static final String SINGLE_DAY_DB_KEY_LOCATION_LONG = "longitude";
+
+
+    private static final int COL_INDEX_0 = 0;
+    private static final int COL_INDEX_1 = 1;
+    private static final int COL_INDEX_2 = 2;
+    private static final int COL_INDEX_3 = 3;
+    private static final int COL_INDEX_4 = 4;
 
 
 
@@ -78,7 +87,7 @@ public class RegistryDB {
         return true;
     }
 
-    public boolean insertData(String name, String email, String passwort)
+    public boolean insertUserInDb(String name, String email, String passwort)
     {
         ContentValues contentValues = new ContentValues();
         contentValues.put(COL_2, name);
@@ -91,10 +100,20 @@ public class RegistryDB {
 
 
     private class registrydbHelper extends SQLiteOpenHelper {
+
         private final String DATABASE_CREATE = "create table "
                 + TABLE_NAME + " (" + COL_1
                 + " integer primary key autoincrement, " + COL_2
                 + " text not null, " + COL_3 + " text, "  + COL_4 + " text);";
+
+        private final String DATABASE_SINGLE_DAY_CREATE = "create table "
+                + SINGLE_DAY_TABLE_NAME + " ("
+                + SINGLE_DAY_DB_KEY_ID + " integer primary key autoincrement, "
+                + SINGLE_DAY_DB_KEY_TEXT + " text, "
+                + SINGLE_DAY_DB_KEY_IMAGE + " BLOB, "
+                + SINGLE_DAY_DB_KEY_LOCATION_LAT + "double, "
+                + SINGLE_DAY_DB_KEY_LOCATION_LONG + "double);";
+
 
         public registrydbHelper(Context c, String dbname,
                                 SQLiteDatabase.CursorFactory factory, int version) {
@@ -103,6 +122,7 @@ public class RegistryDB {
 
         @Override
         public void onCreate(SQLiteDatabase db) {
+            db.execSQL(DATABASE_SINGLE_DAY_CREATE);
             db.execSQL(DATABASE_CREATE);
         }
 
