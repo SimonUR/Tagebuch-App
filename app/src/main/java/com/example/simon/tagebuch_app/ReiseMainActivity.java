@@ -236,6 +236,4 @@ public class ReiseMainActivity extends AppCompatActivity {
 
             }
         }
-
-
 }

@@ -25,10 +25,14 @@
     <string name="endTravel">Ende (Datum)</string>
 
 
-
     <!-- Strings related to ReiseSingleDayActivity -->
     <string name="infotext">Insert you personal Memory of the Day.</string>
     <string name="locationButtonText">Press to assign your current Location.</string>
+
+
+    <!-- Camera -->
+    <string name="action_settings">Settings</string>
+    <string name="label_camera">Take Picture</string>
 
 
 </resources>
