@@ -34,6 +34,9 @@ public class ReiseMainActivity extends AppCompatActivity {
     private ReisenUebersichtDatabase reisenUebersichtDatabase;
     public static boolean startDatePicker;
     private int userID;
+    private Button addButton;
+    private EditText startDateEdit, endDateEdit;
+    private ListView list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,7 +90,7 @@ public class ReiseMainActivity extends AppCompatActivity {
     }
 
     private void initListAdapter() {
-        ListView list = (ListView) findViewById(R.id.reise_list);
+        list = (ListView) findViewById(R.id.reise_list);
         reisen_adapter = new ReisenAdapter(this, reisen);
         list.setAdapter(reisen_adapter);
     }
@@ -100,8 +103,8 @@ public class ReiseMainActivity extends AppCompatActivity {
     }
 
     private void initDateFields() {
-        final EditText startDateEdit = (EditText) findViewById(R.id.reise_begin_add);
-        EditText endDateEdit = (EditText) findViewById(R.id.reise_ende_add);
+        startDateEdit = (EditText) findViewById(R.id.reise_begin_add);
+        endDateEdit = (EditText) findViewById(R.id.reise_ende_add);
 
         startDateEdit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -132,8 +135,8 @@ public class ReiseMainActivity extends AppCompatActivity {
     }
 
     private void initTaskButton() {
-        Button addTaskButton = (Button) findViewById(R.id.todo_edit_button);
-        addTaskButton.setOnClickListener(new View.OnClickListener() {
+        addButton = (Button) findViewById(R.id.todo_edit_button);
+        addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 addInputToList();
@@ -198,7 +201,7 @@ public class ReiseMainActivity extends AppCompatActivity {
 
     // #### initListView();
         private void initListView() {
-            final ListView list = (ListView) findViewById(R.id.reise_list);
+            list = (ListView) findViewById(R.id.reise_list);
             list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

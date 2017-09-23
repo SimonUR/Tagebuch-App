@@ -64,7 +64,8 @@
             android:layout_width="30dp"
             android:layout_height="match_parent"
             android:layout_weight="0.2"
-            android:text="+"
+            android:backgroundTint="@color/buttonColor"
+            android:text="@string/addButton"
             android:textSize="18sp" />
 
     </LinearLayout>

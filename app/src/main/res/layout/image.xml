@@ -6,7 +6,6 @@
         android:id="@+id/photo_grid"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/button_camera"
         android:verticalSpacing="0dp"
         android:horizontalSpacing="0dp"
         android:stretchMode="columnWidth"
@@ -17,7 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_alignParentBottom="true"
-        android:background="green"
+        android:background="@color/android_green"
         android:contentDescription="@string/label_camera"
         android:src="@drawable/ic_action_photo"/>
 

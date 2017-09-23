@@ -1,12 +1,8 @@
 package com.example.simon.tagebuch_app.image;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteException;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.view.Display;
@@ -15,16 +11,14 @@ import android.view.View.OnClickListener;
 import android.widget.GridView;
 import android.widget.ImageButton;
 
+
+import com.example.simon.tagebuch_app.R;
+
 import java.io.ByteArrayOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
-
-import com.example.simon.tagebuch_app.R;
-import com.example.simon.tagebuch_app.image.Camera;
-import com.example.simon.tagebuch_app.image.DatabaseHelper;
-import com.example.simon.tagebuch_app.image.ImageAdapter;
 
 
 public class PictureActivity extends Activity {

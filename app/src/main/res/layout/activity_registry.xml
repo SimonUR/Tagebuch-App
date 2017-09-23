@@ -3,13 +3,13 @@
 
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="#faa519"
+    android:background="@color/android_green"
     android:orientation="vertical"
     >
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="48dp"
-        android:background="#faa519"
+        android:background="@color/android_green"
         android:orientation="horizontal"
         android:layout_alignParentTop="true"
         android:weightSum="1">
@@ -17,8 +17,8 @@
         <TextView android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="Neu Anmelden"
-            android:textColor="#2582C5"
+            android:text="@string/registryText"
+            android:textColor="@color/text_dark"
             android:layout_marginLeft="25dp"
             android:textSize="18sp"
             android:textStyle="bold"
@@ -36,20 +36,22 @@
         android:layout_marginRight="16dp"
         android:layout_marginBottom="30dp"
         android:orientation="vertical"
-        android:background="#faa519">
+        android:background="@color/android_green">
 
         <EditText android:layout_width="fill_parent"
             android:layout_height="40dp"
             android:id="@+id/name"
-            android:hint="name"
-            android:background="#f3f3f3"
+            android:hint="@string/hintName"
+            android:background="@color/textBoxBackground"
             android:paddingLeft="5dp"
             android:layout_marginTop="30dp"/>
+
         <EditText android:layout_width="fill_parent"
             android:layout_height="40dp"
             android:id="@+id/email"
-            android:hint="email"
-            android:background="#f3f3f3"
+            android:hint="@string/hintemail"
+            android:inputType="textEmailAddress"
+            android:background="@color/textBoxBackground"
             android:paddingLeft="5dp"
             android:layout_marginTop="15dp"/>
 
@@ -58,8 +60,8 @@
             android:layout_width="fill_parent"
             android:layout_height="40dp"
             android:layout_marginTop="15dp"
-            android:background="#f3f3f3"
-            android:hint="passwort / mind.6 Zeichen"
+            android:background="@color/textBoxBackground"
+            android:hint="@string/hintpasswort"
             android:inputType="textPassword"
             android:paddingLeft="5dp" />
 
@@ -68,8 +70,8 @@
             android:layout_width="fill_parent"
             android:layout_height="40dp"
             android:layout_marginTop="15dp"
-            android:background="#f3f3f3"
-            android:hint="passwort bestätigen"
+            android:background="@color/textBoxBackground"
+            android:hint="@string/hintcheckpasswort"
             android:inputType="textPassword"
             android:paddingLeft="5dp" />
 
@@ -79,9 +81,9 @@
             android:layout_height="38dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="16dp"
-            android:background="#0000ff"
-            android:text="abschicken"
-            android:textColor="#fff" />
+            android:background="@color/text_dark"
+            android:text="@string/registryButtonText"
+            android:textColor="@color/android_green" />
 
     </LinearLayout>
 

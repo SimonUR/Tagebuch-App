@@ -1,53 +1,32 @@
 package com.example.simon.tagebuch_app;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
-import android.annotation.TargetApi;
+
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.support.annotation.NonNull;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.app.LoaderManager.LoaderCallbacks;
-
-import android.content.CursorLoader;
-import android.content.Loader;
-import android.database.Cursor;
-import android.net.Uri;
-import android.os.AsyncTask;
-
-import android.os.Build;
 import android.os.Bundle;
-import android.provider.ContactsContract;
-import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.inputmethod.EditorInfo;
-import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.example.simon.tagebuch_app.databases.RegistryDB;
+import com.example.simon.tagebuch_app.image.PictureActivity;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import static android.Manifest.permission.READ_CONTACTS;
 
 /**
  * A login screen that offers login via email/password.
- * datenbank muss nach login noch geschlossen werden da ondestroy in registreyactivty noch gebracuht wird!!!!
  */
 public class LoginActivity extends AppCompatActivity{
 
-    /**
-     * Id to identity READ_CONTACTS permission request.
-     */
+    // db class to check if user exist by checking email and password with db.
     private RegistryDB db;
+    private final String userError = "Benutzer existiert nicht!";
+    private final String logInMessage = "LogIn erfolgreich!";
+    private final String intentIdKey = "ID";
 
 
     // UI references.
@@ -62,6 +41,34 @@ public class LoginActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         // Set up the login form.
+        setupUserUI();
+        setupSignInButton();
+        setupRegistryButton();
+
+        Button button = (Button) findViewById(R.id.skipToImage);
+        button.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this, PictureActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
+    }
+
+    private void setupRegistryButton() {
+        registryButton = (Button) findViewById(R.id.skipToRegistryActivity);
+        registryButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this, RegistryActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
+
+    private void setupUserUI() {
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
         mPasswordView = (EditText) findViewById(R.id.password);
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -73,7 +80,9 @@ public class LoginActivity extends AppCompatActivity{
                 return false;
             }
         });
+    }
 
+    private void setupSignInButton() {
         signInButton = (Button) findViewById(R.id.email_sign_in_button);
         signInButton.setOnClickListener(new OnClickListener() {
             @Override
@@ -83,28 +92,22 @@ public class LoginActivity extends AppCompatActivity{
                 if(db.checkLogInInfo(mEmailView.getText().toString(), mPasswordView.getText().toString())){
                     Intent intent = new Intent(LoginActivity.this, ReiseMainActivity.class);
                     int userID = db.getUserID(mEmailView.getText().toString(), mPasswordView.getText().toString());
-                    intent.putExtra("ID", userID);
+                    intent.putExtra(intentIdKey, userID);
+                    Toast.makeText(LoginActivity.this, logInMessage, Toast.LENGTH_SHORT).show();
+                    mPasswordView.setText("");
+                    mEmailView.setText("");
+                    db.close();
                     startActivity(intent);
                 }else{
-                    Toast.makeText(LoginActivity.this, "Benutzer existiert nicht!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, userError, Toast.LENGTH_SHORT).show();
                 }
             }
         });
-        registryButton = (Button) findViewById(R.id.skipToRegistryActivity);
-        registryButton.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(LoginActivity.this, RegistryActivity.class);
-                startActivity(intent);
-            }
-        });
-
 
     }
 
     @Override
     protected void onDestroy(){
-        db.close();
         super.onDestroy();
     }
 

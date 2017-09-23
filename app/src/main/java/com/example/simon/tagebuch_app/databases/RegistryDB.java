@@ -30,6 +30,9 @@ public class RegistryDB {
     public static final String COL_4 = "passwort";
 
     private static final String SINGLE_DAY_DB_KEY_ID = "id";
+    private static final String SINGLE_DAY_DB_KEY_DAY = "day";
+    private static final String SINGLE_DAY_DB_KEY_DATE = "date";
+    private static final String SINGLE_DAY_DB_KEY_USER_ID = "userId";
     private static final String SINGLE_DAY_DB_KEY_TEXT = "usertext";
     private static final String SINGLE_DAY_DB_KEY_IMAGE = "image";
     private static final String SINGLE_DAY_DB_KEY_LOCATION_LAT = "latitude";
@@ -109,6 +112,9 @@ public class RegistryDB {
         private final String DATABASE_SINGLE_DAY_CREATE = "create table "
                 + SINGLE_DAY_TABLE_NAME + " ("
                 + SINGLE_DAY_DB_KEY_ID + " integer primary key autoincrement, "
+                + SINGLE_DAY_DB_KEY_DAY + " text, "
+                + SINGLE_DAY_DB_KEY_DATE + " text, "
+                + SINGLE_DAY_DB_KEY_USER_ID + "integer, "
                 + SINGLE_DAY_DB_KEY_TEXT + " text, "
                 + SINGLE_DAY_DB_KEY_IMAGE + " BLOB, "
                 + SINGLE_DAY_DB_KEY_LOCATION_LAT + "double, "

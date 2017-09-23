@@ -7,12 +7,15 @@ import android.graphics.Point;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.util.Log;
 
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+
+import static com.example.simon.tagebuch_app.image.PictureActivity.*;
 
 
 public class Camera {
@@ -26,15 +29,18 @@ public class Camera {
     public void takePicture(int requestCode) {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         if (takePictureIntent.resolveActivity(activityContext.getPackageManager()) != null) {
+
             File photoFile = null;
             try {
                 photoFile = createImageFile();
-            } catch (IOException ex) {
-            }
-            if (photoFile != null) {
-                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT,
-                        Uri.fromFile(photoFile));
-                activityContext.startActivityForResult(takePictureIntent, requestCode);
+                if (photoFile != null) {
+
+                    takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT,
+                            Uri.fromFile(photoFile));
+                    activityContext.startActivityForResult(takePictureIntent, requestCode);
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         }
     }
@@ -64,8 +70,6 @@ public class Camera {
     }
 
 
-
-
     private File createImageFile() throws IOException {
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.GERMAN).format(new Date());
         String imageFileName = "JPEG_" + timeStamp + "_";
@@ -76,6 +80,4 @@ public class Camera {
 
         return image;
     }
-
-
 }

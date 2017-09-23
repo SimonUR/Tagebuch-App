@@ -14,6 +14,8 @@ public class RegistryActivity extends AppCompatActivity {
 
     private EditText inputName, inputEmail, inputPasswort, inputPasswortWieder;
     private Button abschicken;
+    private final String errorMessage = "Daten wurden nicht gespeichert!";
+    private final String successMessage = "Daten wurden gespeichert.";
     public static RegistryDB myDb;
 
 
@@ -68,12 +70,12 @@ public class RegistryActivity extends AppCompatActivity {
                 email.matches(emailPattern))
         {
             myDb.insertUserInDb(name,email,passwort);
-            Toast.makeText(this, "Data Inserted Successfully", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, successMessage, Toast.LENGTH_SHORT).show();
             clearText();
             return true;
 
         }else {
-            Toast.makeText(this, "Data Inserted Failed! ",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, errorMessage,Toast.LENGTH_SHORT).show();
             return false;
         }
     }
