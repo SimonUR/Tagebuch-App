@@ -9,7 +9,6 @@
         android:id="@+id/infoText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="0.10"
         android:text="@string/infotext"
         android:textAlignment="center"
         android:textAllCaps="false"
@@ -32,7 +31,7 @@
             android:id="@+id/userAddText"
             android:layout_width="185dp"
             android:layout_height="wrap_content"
-            android:text="@string/addTextButton" />
+            android:hint="@string/addTextButton" />
 
     </LinearLayout>
 
@@ -41,4 +40,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/locationButtonText" />
+
+    <Button
+        android:id="@+id/showMap"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/buttonForMap" />
 </LinearLayout>

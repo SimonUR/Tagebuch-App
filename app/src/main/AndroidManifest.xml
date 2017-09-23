@@ -43,7 +43,6 @@
             android:theme="@style/AppTheme" />
         <activity android:name=".ReiseSingleDayActivity"
             android:label="@string/title_activity_single_day"/>
-        <activity android:name=".reise.GPSActivity" />
         <activity android:name=".image.PictureActivity" />
     </application>
 

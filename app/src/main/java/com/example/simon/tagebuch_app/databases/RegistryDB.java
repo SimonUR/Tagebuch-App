@@ -7,12 +7,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.content.ContentValues;
 
-import static com.example.simon.tagebuch_app.databases.RegistryDB.COL_1;
-import static com.example.simon.tagebuch_app.databases.RegistryDB.COL_2;
-import static com.example.simon.tagebuch_app.databases.RegistryDB.COL_3;
-import static com.example.simon.tagebuch_app.databases.RegistryDB.COL_4;
-import static com.example.simon.tagebuch_app.databases.RegistryDB.TABLE_NAME;
-
 /**
  * Created by tani on 19.09.2017.
  */
@@ -106,14 +100,35 @@ public class RegistryDB {
                 + SINGLE_DAY_DB_KEY_DATE + " = '" + date + "' AND "
                 + SINGLE_DAY_DB_KEY_USER_ID + " = " + userId;
         Cursor cursor = db.rawQuery(query, null);
-        if(cursor == null) {
+        if(cursor.getCount() == 0) {
             ContentValues newDay = new ContentValues();
             newDay.put(SINGLE_DAY_DB_KEY_DAY, day);
             newDay.put(SINGLE_DAY_DB_KEY_DATE, date);
             newDay.put(SINGLE_DAY_DB_KEY_USER_ID, userId);
+            newDay.put(SINGLE_DAY_DB_KEY_TEXT, "");
             db.insert(SINGLE_DAY_TABLE_NAME, null, newDay);
         }
         cursor.close();
+    }
+
+    public void saveGeoData(String day, String date, int userId, double latitude, double longitude){
+        String query = "UPDATE " + SINGLE_DAY_TABLE_NAME +
+                " set " + SINGLE_DAY_DB_KEY_LOCATION_LAT + " = " + latitude + ", "
+                + SINGLE_DAY_DB_KEY_LOCATION_LONG + " = "+ longitude +" WHERE "
+                + SINGLE_DAY_DB_KEY_DAY + " = '" + day + "' AND "
+                + SINGLE_DAY_DB_KEY_DATE + " = '" + date + "' AND "
+                + SINGLE_DAY_DB_KEY_USER_ID + " = " + userId;
+        db.rawQuery(query, null);
+    }
+    public double[] getGeoData(String day, String date, int userId, double latitude, double longitude) {
+        String query = "SELECT " + SINGLE_DAY_DB_KEY_LOCATION_LAT + ", " + SINGLE_DAY_DB_KEY_LOCATION_LONG + " FROM " + SINGLE_DAY_TABLE_NAME + " WHERE "
+                + SINGLE_DAY_DB_KEY_DAY + " = '" + day + "' AND "
+                + SINGLE_DAY_DB_KEY_DATE + " = '" + date + "' AND "
+                + SINGLE_DAY_DB_KEY_USER_ID + " = " + userId;
+        Cursor cursor = db.rawQuery(query, null);
+        cursor.moveToFirst();
+        double[] data = {cursor.getDouble(0), cursor.getDouble(1)};
+        return data;
     }
 
     public void addTextToDB(String day, String date, int userId, String userInput){
@@ -122,20 +137,22 @@ public class RegistryDB {
                 + SINGLE_DAY_DB_KEY_DATE + " = '" + date + "' AND "
                 + SINGLE_DAY_DB_KEY_USER_ID + " = " + userId;
         Cursor cursor = db.rawQuery(selectQuery, null);
-        if(cursor != null) {
-            if(cursor.moveToFirst()) {
-                userInput = cursor.getString(0) + "\n" + userInput;
-                System.out.println(userInput);
-            }
+        if(cursor.getCount() != 0) {
+            cursor.moveToFirst();
+            userInput = cursor.getString(0) + "\n" + userInput;
+
         }
-        System.out.println(userInput);
+        cursor.close();
+        updateTextInDB(day, date, userId, userInput);
+    }
+
+    private void updateTextInDB(String day, String date, int userId, String userInput) {
         String addQuery = "UPDATE " + SINGLE_DAY_TABLE_NAME + " set " + SINGLE_DAY_DB_KEY_TEXT + " = '" + userInput
                 + "' WHERE "
                 + SINGLE_DAY_DB_KEY_DAY + " = '" + day + "' AND "
                 + SINGLE_DAY_DB_KEY_DATE + " = '" + date + "' AND "
                 + SINGLE_DAY_DB_KEY_USER_ID + " = " + userId;
-            db.rawQuery(addQuery, null);
-        cursor.close();
+        db.rawQuery(addQuery, null);
     }
 
     public String getUserText(String day, String date, int userId){
@@ -144,12 +161,12 @@ public class RegistryDB {
                 + SINGLE_DAY_DB_KEY_DATE + " = '" + date + "' AND "
                 + SINGLE_DAY_DB_KEY_USER_ID + " = " + userId;
         Cursor cursor = db.rawQuery(selectQuery, null);
-        if(cursor != null) {
-            if(cursor.moveToFirst()) {
+        if(cursor.getCount() != 0) {
+            cursor.moveToFirst();
                 String text = cursor.getString(0);
                 cursor.close();
                 return text;
-            }
+
         }
         cursor.close();
         return "";

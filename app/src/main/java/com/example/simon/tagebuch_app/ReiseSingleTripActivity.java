@@ -28,6 +28,7 @@ public class ReiseSingleTripActivity extends AppCompatActivity {
     private reiseTageDatabase reiseTagedb;
     private int userID;
     private int lengthOfTrip = 1;
+    private String tripName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +39,7 @@ public class ReiseSingleTripActivity extends AppCompatActivity {
             initReiseTageList();
             assignUserId();
             updateList();
+        setTitle(tripName);
 
 
     }
@@ -47,6 +49,7 @@ public class ReiseSingleTripActivity extends AppCompatActivity {
         Bundle tripInfo = intent.getExtras();
         String startDate = tripInfo.get("Startdatum").toString();
         String endDate = tripInfo.get("Enddatum").toString();
+        tripName = tripInfo.get("Reisename").toString();
 
         Date formattedStartDate = null;
         Date formattedEndDate = null;

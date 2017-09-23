@@ -39,6 +39,7 @@
     <string name="addTextButton">Text hinzufügen</string>
     <string name="infotext">Insert you personal Memory of the Day.</string>
     <string name="locationButtonText">Press to assign your current Location.</string>
+    <string name="buttonForMap">Show location on map.</string>
 
 
     <!-- Camera -->
