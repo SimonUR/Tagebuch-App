@@ -24,6 +24,9 @@ public class ReiseSingleDayActivity extends AppCompatActivity {
     private Button cancelButton;
     private Button addTextToDb;
     private RegistryDB newDB;
+    private TextView userText;
+    private EditText input;
+    private TextView infoText;
 
     private String day;
     private String date;
@@ -36,6 +39,16 @@ public class ReiseSingleDayActivity extends AppCompatActivity {
         initUI();
         initDB();
         assignIntentInfos();
+        createNewDayInDb();
+        updateUserText();
+    }
+
+    private void updateUserText() {
+        userText.setText(newDB.getUserText(day, date, userId));
+    }
+
+    private void createNewDayInDb() {
+        newDB.createDayInDB(day, date, userId);
     }
 
     @Override
@@ -59,6 +72,8 @@ public class ReiseSingleDayActivity extends AppCompatActivity {
     }
 
     private void initUI() {
+        infoText = (TextView) findViewById(R.id.infoText);
+        userText = (TextView) findViewById(R.id.textByUser);
         locationButton = (Button) findViewById(R.id.assignLocationButton);
         addTextButton = (Button) findViewById(R.id.userAddText);
         textButtonAddListener();
@@ -112,6 +127,10 @@ public class ReiseSingleDayActivity extends AppCompatActivity {
         addTextToDb.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                input = (EditText) alertDialog.findViewById(R.id.userInput);
+                System.out.println(input.getText().toString());
+                newDB.addTextToDB(day, date, userId, input.getText().toString());
+                updateUserText();
                 alertDialog.dismiss();
             }
         });

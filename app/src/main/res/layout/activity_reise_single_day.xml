@@ -1,4 +1,5 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -12,26 +13,26 @@
         android:text="@string/infotext"
         android:textAlignment="center"
         android:textAllCaps="false"
-        android:textColor="@color/colorAccent"
+        android:textColor="@color/darkGreen"
         android:textSize="20sp"
         android:textStyle="bold" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:weightSum="1">
 
         <TextView
             android:id="@+id/textByUser"
             android:layout_width="195dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.15" />
+            android:layout_height="wrap_content" />
 
         <Button
             android:id="@+id/userAddText"
             android:layout_width="185dp"
             android:layout_height="wrap_content"
-            android:text="Button" />
+            android:text="@string/addTextButton" />
 
     </LinearLayout>
 
@@ -39,6 +40,5 @@
         android:id="@+id/assignLocationButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="0.10"
         android:text="@string/locationButtonText" />
 </LinearLayout>

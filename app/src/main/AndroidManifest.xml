@@ -23,8 +23,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".LoginActivity"
-            android:label="@string/logInHeader">
+            android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -42,7 +41,8 @@
             android:name=".ReiseSingleTripActivity"
             android:label="@string/title_activity_reise_single_trip"
             android:theme="@style/AppTheme" />
-        <activity android:name=".ReiseSingleDayActivity" />
+        <activity android:name=".ReiseSingleDayActivity"
+            android:label="@string/title_activity_single_day"/>
         <activity android:name=".reise.GPSActivity" />
         <activity android:name=".image.PictureActivity" />
     </application>

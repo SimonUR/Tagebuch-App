@@ -25,15 +25,18 @@
 
     <!-- Strings related to ReiseMainActivity -->
     <string name="title_activity_reise_main">Ihre Reisen</string>
-    <string name="title_activity_reise_single_trip">ReiseSingleTripActivity</string>
     <string name="addNewTravel">Neue Reise hinzufügen:</string>
     <string name="travelAim">Name der Reise</string>
     <string name="addButton">+</string>
     <string name="beginTravel">Beginn (Datum)</string>
     <string name="endTravel">Ende (Datum)</string>
 
+    <!-- Strings related to ReiseSingleTripActivity -->
+    <string name="title_activity_reise_single_trip">Reisetage</string>
 
     <!-- Strings related to ReiseSingleDayActivity -->
+    <string name="title_activity_single_day">Reisetag</string>
+    <string name="addTextButton">Text hinzufügen</string>
     <string name="infotext">Insert you personal Memory of the Day.</string>
     <string name="locationButtonText">Press to assign your current Location.</string>
 
@@ -43,7 +46,6 @@
     <string name="label_camera">Take Picture</string>
 
     <!-- dialog -->
-    <string name="dialogTitle">Text eintippen:</string>
     <string name="hintDialog">Gedanken niederschreiben...</string>
     <string name="addButtonDialog">Text hinzufügen</string>
     <string name="cancelText">Abbrechen</string>

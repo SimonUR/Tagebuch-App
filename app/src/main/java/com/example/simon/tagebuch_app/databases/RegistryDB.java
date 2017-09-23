@@ -100,6 +100,53 @@ public class RegistryDB {
         return true;
         }
 
+    public void createDayInDB(String day, String date, int userId){
+        String query = "SELECT " + SINGLE_DAY_DB_KEY_ID + " FROM " + SINGLE_DAY_TABLE_NAME + " WHERE "
+                + SINGLE_DAY_DB_KEY_DAY + " = '" + day + "' AND "
+                + SINGLE_DAY_DB_KEY_DATE + " = '" + date + "' AND "
+                + SINGLE_DAY_DB_KEY_USER_ID + " = " + userId;
+        Cursor cursor = db.rawQuery(query, null);
+        if(cursor == null) {
+            ContentValues newDay = new ContentValues();
+            newDay.put(SINGLE_DAY_DB_KEY_DAY, day);
+            newDay.put(SINGLE_DAY_DB_KEY_DATE, date);
+            newDay.put(SINGLE_DAY_DB_KEY_USER_ID, userId);
+            db.insert(SINGLE_DAY_TABLE_NAME, null, newDay);
+        }
+    }
+
+    public void addTextToDB(String day, String date, int userId, String userInput){
+        String selectQuery = "SELECT " + SINGLE_DAY_DB_KEY_TEXT + " FROM " + SINGLE_DAY_TABLE_NAME + " WHERE "
+                + SINGLE_DAY_DB_KEY_DAY + " = '" + day + "' AND "
+                + SINGLE_DAY_DB_KEY_DATE + " = '" + date + "' AND "
+                + SINGLE_DAY_DB_KEY_USER_ID + " = " + userId;
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        if(cursor.moveToFirst()) {
+            userInput = cursor.getString(0) + "\n" + userInput;
+        }
+
+            String addQuery = "UPDATE " + SINGLE_DAY_TABLE_NAME + " set " + SINGLE_DAY_DB_KEY_TEXT + " = '" + userInput
+                        + "' WHERE "
+                    + SINGLE_DAY_DB_KEY_DAY + " = '" + day + "' AND "
+                    + SINGLE_DAY_DB_KEY_DATE + " = '" + date + "' AND "
+                    + SINGLE_DAY_DB_KEY_USER_ID + " = " + userId;
+            db.rawQuery(addQuery, null);
+    }
+
+    public String getUserText(String day, String date, int userId){
+        String selectQuery = "SELECT " + SINGLE_DAY_DB_KEY_TEXT + " FROM " + SINGLE_DAY_TABLE_NAME + " WHERE "
+                + SINGLE_DAY_DB_KEY_DAY + " = '" + day + "' AND "
+                + SINGLE_DAY_DB_KEY_DATE + " = '" + date + "' AND "
+                + SINGLE_DAY_DB_KEY_USER_ID + " = " + userId;
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        if(cursor.moveToFirst()) {
+            cursor.moveToFirst();
+            String text = cursor.getString(0);
+            return text;
+        }
+        return "";
+    }
+
 
 
     private class registrydbHelper extends SQLiteOpenHelper {
@@ -114,11 +161,11 @@ public class RegistryDB {
                 + SINGLE_DAY_DB_KEY_ID + " integer primary key autoincrement, "
                 + SINGLE_DAY_DB_KEY_DAY + " text, "
                 + SINGLE_DAY_DB_KEY_DATE + " text, "
-                + SINGLE_DAY_DB_KEY_USER_ID + "integer, "
+                + SINGLE_DAY_DB_KEY_USER_ID + " integer, "
                 + SINGLE_DAY_DB_KEY_TEXT + " text, "
                 + SINGLE_DAY_DB_KEY_IMAGE + " BLOB, "
-                + SINGLE_DAY_DB_KEY_LOCATION_LAT + "double, "
-                + SINGLE_DAY_DB_KEY_LOCATION_LONG + "double);";
+                + SINGLE_DAY_DB_KEY_LOCATION_LAT + " double, "
+                + SINGLE_DAY_DB_KEY_LOCATION_LONG + " double);";
 
 
         public registrydbHelper(Context c, String dbname,
