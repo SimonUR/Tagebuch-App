@@ -113,6 +113,7 @@ public class RegistryDB {
             newDay.put(SINGLE_DAY_DB_KEY_USER_ID, userId);
             db.insert(SINGLE_DAY_TABLE_NAME, null, newDay);
         }
+        cursor.close();
     }
 
     public void addTextToDB(String day, String date, int userId, String userInput){
@@ -121,16 +122,20 @@ public class RegistryDB {
                 + SINGLE_DAY_DB_KEY_DATE + " = '" + date + "' AND "
                 + SINGLE_DAY_DB_KEY_USER_ID + " = " + userId;
         Cursor cursor = db.rawQuery(selectQuery, null);
-        if(cursor.moveToFirst()) {
-            userInput = cursor.getString(0) + "\n" + userInput;
+        if(cursor != null) {
+            if(cursor.moveToFirst()) {
+                userInput = cursor.getString(0) + "\n" + userInput;
+                System.out.println(userInput);
+            }
         }
-
-            String addQuery = "UPDATE " + SINGLE_DAY_TABLE_NAME + " set " + SINGLE_DAY_DB_KEY_TEXT + " = '" + userInput
-                        + "' WHERE "
-                    + SINGLE_DAY_DB_KEY_DAY + " = '" + day + "' AND "
-                    + SINGLE_DAY_DB_KEY_DATE + " = '" + date + "' AND "
-                    + SINGLE_DAY_DB_KEY_USER_ID + " = " + userId;
+        System.out.println(userInput);
+        String addQuery = "UPDATE " + SINGLE_DAY_TABLE_NAME + " set " + SINGLE_DAY_DB_KEY_TEXT + " = '" + userInput
+                + "' WHERE "
+                + SINGLE_DAY_DB_KEY_DAY + " = '" + day + "' AND "
+                + SINGLE_DAY_DB_KEY_DATE + " = '" + date + "' AND "
+                + SINGLE_DAY_DB_KEY_USER_ID + " = " + userId;
             db.rawQuery(addQuery, null);
+        cursor.close();
     }
 
     public String getUserText(String day, String date, int userId){
@@ -139,11 +144,14 @@ public class RegistryDB {
                 + SINGLE_DAY_DB_KEY_DATE + " = '" + date + "' AND "
                 + SINGLE_DAY_DB_KEY_USER_ID + " = " + userId;
         Cursor cursor = db.rawQuery(selectQuery, null);
-        if(cursor.moveToFirst()) {
-            cursor.moveToFirst();
-            String text = cursor.getString(0);
-            return text;
+        if(cursor != null) {
+            if(cursor.moveToFirst()) {
+                String text = cursor.getString(0);
+                cursor.close();
+                return text;
+            }
         }
+        cursor.close();
         return "";
     }
 

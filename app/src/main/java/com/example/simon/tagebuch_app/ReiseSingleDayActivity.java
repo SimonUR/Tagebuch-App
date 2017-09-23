@@ -128,7 +128,6 @@ public class ReiseSingleDayActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 input = (EditText) alertDialog.findViewById(R.id.userInput);
-                System.out.println(input.getText().toString());
                 newDB.addTextToDB(day, date, userId, input.getText().toString());
                 updateUserText();
                 alertDialog.dismiss();
